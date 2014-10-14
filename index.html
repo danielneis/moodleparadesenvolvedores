@@ -7,7 +7,7 @@
         <link href="css/github.css" rel="stylesheet" type="text/css">
         <style>
         body {
-            padding-top: 90px; /* 60px to make the container go all the way to the bottom of the topbar */
+            padding-bottom: 2em;
         }
         img {
             margin-bottom: 1em;
@@ -19,38 +19,27 @@
             color: black;
             text-decoration: none;
         }
+        footer {
+            position: fixed;
+            font-size: 1.1em;
+            height: 2em;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            border-top: 1px solid gray;
+        }
+        .span1 {
+            white-space: nowrap;
+        }
+        #license {
+            border-top: 1px solid gray;
+            padding-top: 0.5em
+        }
         </style>
     </head>
     <body>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="#">Moodle para desenvolvedores</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="#home">Olá, Moodle</a></li>
-                            <li><a href="#overview">Visão geral</a></li>
-                            <li><a href="#blocks">Blocos</a></li>
-                            <li><a href="#activities">Atividades</a></li>
-                            <li><a href="#resources">Recursos</a></li>
-                            <li><a href="#plugins">Plugins</a></li>
-                            <li><a href="#roles-and-capabilities">Papéis e permissões</a></li>
-                            <li><a href="#auth">Autenticação</a></li>
-                            <li><a href="#enrol">Inscrição</a></li>
-                            <li><a href="#grades">Notas</a></li>
-                            <li><a href="#apis">APIs</a></li>
-                            <li><a href="#webservices">Webservices</a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+        <a href="https://github.com/danielneis/moodleparadesenvolvedores"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <div class="container">
 
@@ -59,7 +48,7 @@
 
             <p>O <a href="http://www.moodle.org">Moodle</a> é um Ambiente Virtual de Ensino Aprendizagem (AVEA), também conhecido como Course Management System ou Learning Management System.</p>
             <p>O Moodle é um software livre, escrito principalmente em PHP e JavaScript. O projeto começou como trabalho de doutorado de Martin Dougiamas (ainda líder do projeto) e em 2012 completou sua primeria década de existência.</p>
-            <p>Atualmente a maior parte do desenvolvimento e da gerência do projeto é feita no Moodle HQ, sede da Moodle Pty Ltd., em Perth, na Australia. Além dos mais de 50 funcionários no Moodle HQ, a "comunidade Moodle" é formada por pessoas ao redor de todo o mundo trabalhando para universidades, escolas, governos e empresas privadas. Essas empresas que são oficialmente reconhecidas como Moodle Partners prestam serviçoes de consultoria e/ou treinamento sobre Moodle em diversos países, mas não são os maiores contribuidores de código. No Brasil, por exemplo, as duas empresas licenciadas nunca contribuíram nem com tradução, nem com correção de bugs ou novas features para o código base (coisas que estão acostumadas a vender para serus clientes).</p>
+            <p>Atualmente a maior parte do desenvolvimento e da gerência do projeto é feita no Moodle HQ, sede da Moodle Pty Ltd., em Perth, na Australia. Além dos mais de 50 funcionários no Moodle HQ, a "comunidade Moodle" é formada por pessoas ao redor de todo o mundo trabalhando para universidades, escolas, governos e empresas privadas. Essas empresas que são oficialmente reconhecidas como Moodle Partners prestam serviçoes de consultoria e/ou treinamento sobre Moodle em diversos países.</p>
             <p>O portal do projeto é construído utilizando o próprio Moodle e a interação entre a comunidade se dá principalmente através dos fóruns de discussão. O principal fórum é o <a href="https://moodle.org/mod/forum/view.php?id=55">General developer forum</a>, onde são tratadas a maior parte das questões de desenvolvimento/comportamento do Moodle de forma global. Existe também um <a href="http://moodle.org/mod/forum/view.php?id=50">General problems forum</a>, assim como fóruns para discussão de usabilidade, pedagogia e filosofia, para cada plugin que integra a distribuição padrão, fóruns de comunidades de <a href="https://moodle.org/course/category.php?id=3">outros países em diversos idiomas</a> (incluindo a comunidade <a href="https://moodle.org/course/view.php?id=35">brasileira</a>) e <a href="https://moodle.org/course/view.php?id=5">vários outros</a>.</p>
 
             <img src="img/moodle.org.home.png" class="thumbnail"/>
@@ -805,15 +794,31 @@ $services = array(
             </div>
         </div>
 
-        <div class="footer" style="border-top: 1px solid gray; padding-top: 0.5em">
+        <div id="license">
         <center>
-        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-        <p>Autor:</p>
-        <ul>
-            <li>Daniel Neis &lt;danielneis@gmail.com&gt;</li>
-        </ul>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            <p>Autor:</p>
+            <ul>
+                <li>Daniel Neis &lt;danielneis@gmail.com&gt;</li>
+            </ul>
         </center>
         </div>
+                    <footer>
+                    <div class="row">
+                        <div class="span1"><a href="#home">Olá, Moodle</a></div>
+                        <div class="span1"><a href="#overview">Visão geral</a></div>
+                        <div class="span1"><a href="#blocks">Blocos</a></div>
+                        <div class="span1"><a href="#activities">Atividades</a></div>
+                        <div class="span1"><a href="#resources">Recursos</a></div>
+                        <div class="span1"><a href="#plugins">Plugins</a></div>
+                        <div class="span1"><a href="#roles-and-capabidivties">Permissões</a></div>
+                        <div class="span1"><a href="#auth">Autenticação</a></div>
+                        <div class="span1"><a href="#enrol">Inscrição</a></div>
+                        <div class="span1"><a href="#grades">Notas</a></div>
+                        <div class="span1"><a href="#apis">APIs</a></div>
+                        <div class="span1"><a href="#webservices">Webservices</a></div>
+                    </div>
+                    </footer>
 
         <script src="js/jquery-1.8.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -825,7 +830,6 @@ $services = array(
                 }
                 setTimeout(showHiddenParagraphs, 1000);
         });
-        var shiftWindow = function() { scrollBy(0, -90) };
         if (location.hash) shiftWindow();
         window.addEventListener("hashchange", shiftWindow);
         </script>
