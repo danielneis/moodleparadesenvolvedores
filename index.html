@@ -16,7 +16,7 @@
         <div class="container">
 
             <div class="row-fluid">
-            <h1><a id="home" href="#home">Olá, Moodle</a></h1>
+            <h1><a id="home" href="#home">Moodle para desenvolvedores</a></h1>
 
             <p>O <a href="https://www.moodle.org">Moodle</a> é um Ambiente Virtual de Ensino Aprendizagem (AVEA), também conhecido como Course Management System ou Learning Management System.</p>
             <p>O Moodle é um software livre, escrito principalmente em PHP e JavaScript. O projeto começou como trabalho de doutorado de Martin Dougiamas (ainda líder do projeto) e em 2012 completou sua primeria década de existência.</p>
@@ -27,12 +27,34 @@
 
             <p>Além dos fóruns, o Moodle conta também com um <a href="https://tracker.moodle.org">Bug Tracker</a> para gerenciar os bugs e contribuições relativas a código-fonte; uma <a href="https://docs.moodle.org">Wiki Oficial</a> com documentação cada vez mais ampla detalhada, para todo tipo de usuário, seja administrador, professor, aluno ou desenvolvedor; e uma <a href="https://lang.moodle.org">ferramenta para tradução</a>.</p>
 
-            <h2>Obtendo e instalando o Moodle</h2>
+            <div class="row-fluid">
+                <h2>Conteúdo</h2>
+                <ul>
+                <li><a href="#download">Obtendo o Moodle</a></li>
+                <li><a href="#install">Instalando o Moodle</a></li>
+                <li><a href="#overview">Visão geral</a></li>
+                <li><a href="#database">Modelo da base de dados</a></li>
+                <li><a href="#blocks">Blocos</a></li>
+                <li><a href="#activities">Atividades</a></li>
+                <li><a href="#resources">Recursos</a></li>
+                <li><a href="#plugins">Plugins</a></li>
+                <li><a href="#roles-and-capabilities">Permissões</a></li>
+                <li><a href="#auth">Autenticação</a></li>
+                <li><a href="#enrol">Inscrição</a></li>
+                <li><a href="#grades">Notas</a></li>
+                <li><a href="#apis">APIs</a></li>
+                <li><a href="#webservices">Webservices</a></li>
+                </ul>
+            </div>
+
+            <h2><a id="download">Obtendo o Moodle</a></h2>
 
             <p>Você pode baixar o Moodle em <a href="https://download.moodle.org">https://download.moodle.org</a>.</p>
             <p>O código-fonte do Moodle também está disponível no <a href="https://github.com">Github</a> em <a href="https://github.com/moodle/moodle">https://github.com/moodle/moodle</a> para navegar nos arquivos e no histórico de commits e também para clonar na sua máquina:</p>
 
             <pre><code data-language="bash">git clone git://github.com/moodle/moodle.git</code></pre>
+
+            <h2><a id="install">Instalação</h2>
 
             <p>Para instalar o Moodle, basta descompactar o arquivo baixado (ou fazer o clone do repositório) em um diretório acessível pelo seu servidor web e acessá-lo via navegador.</p>
             <p>Antes de começar, verifique os pré-requisitos.</p>
@@ -58,9 +80,6 @@
                 <li>Para o Moodle enviar emails é necessário um servidor SMTP (por exemplo, o Postfix) </li>
             </ul>
 
-            <h3>Instalação</h3>
-
-            <p>A instalação é tranquila, via interface web. Basta acessar através do seu navegador o local onde você colocou o código do Moodle.</p>
             <p>Digamos que você tenha colocado o código no diretório /var/www e que este seja o "document root" do seu servidor web, que é acessível via "localhost".</p>
             <p>Nesse caso, basta você acessar no seu navegador a URL: <a href="localhost">http://localhost</a> que você verá a tela de instalação do Moodle.</p>
 
@@ -78,7 +97,7 @@
 
             <p><span class="warning">Se você tiver problemas na instalação, consulte a <a href="https://docs.moodle.org/en/Installing_Moodle">documentação oficial</a>, as <a href="https://docs.moodle.org/en/Installation_FAQ">perguntas frequentes</a> ou vá até o <a href="https://moodle.org/mod/forum/view.php?id=28">fórum de problemas na instalação (em inglês)</a> ou ao <a href="https://moodle.org/mod/forum/view.php?id=2404">fórum de problemas técnicos</a> da comunidade brasileira.</span></p>
 
-            <h1><a id="overview">Visão geral</a></h1>
+            <h2><a id="overview">Visão geral do Moodle</a></h2>
 
             <p>No Moodle, um Curso é a representação de uma classe em sala de aula. Um curso reúne os materiais que os professores, ou a equipe pedagógica disponibiliza; as atividades propostas para aquele curso, podendo ter ou não notas atribuídas; e as pessoas relacionadas àquele curso, com os diversos papéis que desempenham.</p>
 
@@ -120,7 +139,17 @@
             </div>
 
             <div class="row-fluid">
-            <h1><a id="blocks">Blocos</a></h1>
+                <h2><a id="database">Modelo da base de dados</a></h2>
+
+                <p>Abaixo podemos ver um modelo da Base de dados da versão 3.0 do Moodle.</p>
+                <p>Este modelo foi desenvolvido por Marcus Green, fazendo a engenharia reversa da base utilizando o MySQL Workbench.</p>
+                <p>No <a href="http://www.examulator.com/er/">site onde é diponibilizado este modelo</a>, você pode baixar também o arquivo .mwb para editar e ver outros <a href="http://www.examulator.com/er/components/index.html">diagramas mais detalhados de cada componente</a>.</p>
+
+                <img src="img/moodle30_erd.png" width="100%">
+            </div>
+
+            <div class="row-fluid">
+            <h2><a id="blocks">Blocos</a></h2>
 
             <ul>
                 <li>Activities</li>
@@ -194,7 +223,7 @@
             </div>
 
             <div class="row-fluid">
-            <h1><a id="activities">Atividades</a></h1>
+            <h2><a id="activities">Atividades</a></h2>
 
             <p>Abaixo, os 14 diferentes tipos de atividades no Moodle padrão. Eles podem ser encontrados no menu "adicionar atividade ou recurso".</p>
 
@@ -360,7 +389,7 @@ if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance)))
             </div>
 
             <div class="row-fluid">
-            <h1><a id="resources">Recursos</a></h1>
+            <h2><a id="resources">Recursos</a></h2>
 
             <ul>
             <li>Book - Multi-page resources with a book-like format</li>
@@ -375,7 +404,7 @@ if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance)))
             </div>
 
             <div class="row-fluid">
-            <h1><a id="plugins">Plugins</a></h1>
+            <h2><a id="plugins">Plugins</a></h2>
 
             <p>Você pode conseguir a lista de tipos de plugins da sua versão do Moodle com o seguinte script:</p>
             <pre><code data-language="php">define('CLI_SCRIPT', true);
@@ -392,7 +421,7 @@ print_object(get_plugin_types());</code></pre>
             </div>
 
             <div class="row-fluid">
-            <h1><a id="roles-and-capabilities">Papéis e permissões</a></h1>
+            <h2><a id="roles-and-capabilities">Papéis e permissões</a></h2>
 
             <p>Um papel é um conjunto de permissões definidos para todo o sistema que você pode atribuir a usuários em contextos específicos. O exemplo mais comum de atribuição de papel em contextos são os professores e alunos em um curso.</p>
             <p>O gerenciamento das permissões de cada papel pode ser feito acessando o bloco Administração > Administraçãod o site > Usuário > Permissões > Definir papéis. Este local permite adicionar papéis personalizados ou modificar os já existentes. A aba "gerenciar papéis" permite que o administrador edite cada uma das cerca de 500 "capabilities" associadas com qualquer papel.</p>
@@ -459,7 +488,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             </div>
 
             <div class="row-fluid">
-            <h1><a id="auth">Autenticação</a></h1>
+            <h2><a id="auth">Autenticação</a></h2>
 
             <p>Listar plugins de autenticação</p>
 
@@ -472,7 +501,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             </div>
 
             <div class="row-fluid">
-            <h1><a id="enrol">Inscrição</a></h1>
+            <h2><a id="enrol">Inscrição</a></h2>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrição</a></p>
 
@@ -481,7 +510,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             </div>
 
             <div class="row-fluid">
-            <h1><a id="grades">Notas</a></h1>
+            <h2><a id="grades">Notas</a></h2>
 
             <p>Todas as notas de cada estudante podem ser encontradas no Livro de Notas, ou "Relatório de notas", no bloco Configurações > Administração do curso > Notas.</p>
             <p>O relatório de notas coleta "items" que foram graduados de várias partes do Moodle e permite que você veja e altere eles assim como organizá-los em "categorias" e calcular totais de várias formas. Quando você adiciona um item avaliado em um curso Moodle, o livro de notas automaticamente criará um espaço para as notas que este item irá produzir e também adiciona as próprias notas quando elas são geradas, seja pelo sistema ou por você.</p>
@@ -509,13 +538,13 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             </div>
 
             <div class="row-fluid">
-            <h1><a id="apis">APIs</a></h1>
+            <h2><a id="apis">APIs</a></h2>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></p>
 
-            <h2>Database Abstraction Layer</h2>
+            <h3>Database Abstraction Layer</h3>
 
-            <h3>Data manipulation</h3>
+            <h4>Data manipulation</h4>
 
             <p>A manipulação da base de dados no Moodle é feita através de um objeto global $DB. Abaixo vemos alguns exemplos de uso desse objeto.</p>
 
@@ -574,7 +603,7 @@ $DB->update_record('user', $user);</code></pre>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Data_manipulation_API">Documentação oficial sobre a API de acesso à base de dados</a>.</p>
 
-            <h2>String</h2>
+            <h3>String</h3>
 
             <p>A String API é o modo pelo qual obtemos as strings de texto para mostrar para o usuário. Ela gerencia a internacionalização, baseada em uma série de configurações e variáveis do ambiente para apresentar o texto para o usuário. O Moodle busca as strings em uma série de lugares (com ordem bem definida) de forma que as strings podem ser distribuídas com os pacotes e evita o processo de copiar o diretório de idiomas quando um plugin é instalado.</p>
 
@@ -600,7 +629,7 @@ $string['identificador_da_string'] = 'Minha string com valor {$a->number} e tamb
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/String_API">Documentação oficial sobre a String API</a>.</p>
 
-            <h2>Page</h2>
+            <h3>Page</h3>
             <p>A Page API é parte integrante de todas as páginas do Moodle. Ela permite que o desenvolvedor defina coisas como título da página, o cabeçalho inicial, em que ponto da navegação o usuário está e qual layout a página deve utilizar.</p>
             <p>Para criar uma página "com a cara do Moodle", é preciso, pelo menos, definir a URL e o Contexto atuais.</p>
 
@@ -635,7 +664,7 @@ $PAGE->add_body_classes($arrayofclasses);</code></pre>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Page_API">Documentação oficial sobre a Page API</a></p>
 
-            <h2>Navigation</h2>
+            <h3>Navigation</h3>
             <p>A "Navigation API" permite manipular o sistema de navegação utilizado no Moodle. A navegação está disponível através do objeto $PAGE e usa a informação deste para gerar a estrutura de navegação do site. Os blocos de navegação e configurações são interpretações da estrutura que o Moodle cria. A estrutura de navegação está disponível em três variáveis:</p>
             <dl>
             <dt>$PAGE->navigation</dt>
@@ -653,7 +682,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Navigation_API">Documentação oficial sobre a Navigation API</a></p>
 
-            <h2>Output</h2>
+            <h3>Output</h3>
 
             <p>O Moodle oferece a Output API para facilitar a geração de elementos HTML complexos, além do cabeçalho e rodapé (que são obrigatórios em todas as páginas).</p>
             <p>Após definir os parâmetros da variável $PAGE, para imprimir todo o cabeçalho do Moodle basta chamar uma função:</p>
@@ -664,7 +693,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Output_API">Documentação oficial sobre Output API</a></p>
 
-            <h2>Logging</h2>
+            <h3>Logging</h3>
 
             <p>A API de logs do Moodle é bastante simples e consiste de algumas funções para gerar e consultar logs. A função mais utilizada é a get_log().</p>
 
@@ -681,7 +710,7 @@ get_logs_userday($userid, $courseid, $daystart)</code></pre>
             </div>
 
             <div class="row-fluid">
-            <h1><a id="webservices">Webservices</a></h1>
+            <h2><a id="webservices">Webservices</a></h2>
 
             <p>Os Webservices permitem acesso à API do Moodle de forma segura e controlada. Além das funções já disponíveis do "core" do Moodle, é possível extender os Webservices através dos plugins locais.</p>
             <p>O Moodle oferece diversos protocolos para acesso aos Webservices (SOAP, REST, XMLRPC, etc) e a vantagem é que isso fica transparente na implementação do serviço, apenas o cliente para cada webservice será um pouco diferente.</p>
@@ -780,22 +809,6 @@ $services = array(
             </ul>
         </center>
         </div>
-                    <footer>
-                    <div class="row">
-                        <div class="span1"><a href="#home">Olá, Moodle</a></div>
-                        <div class="span1"><a href="#overview">Visão geral</a></div>
-                        <div class="span1"><a href="#blocks">Blocos</a></div>
-                        <div class="span1"><a href="#activities">Atividades</a></div>
-                        <div class="span1"><a href="#resources">Recursos</a></div>
-                        <div class="span1"><a href="#plugins">Plugins</a></div>
-                        <div class="span1"><a href="#roles-and-capabidivties">Permissões</a></div>
-                        <div class="span1"><a href="#auth">Autenticação</a></div>
-                        <div class="span1"><a href="#enrol">Inscrição</a></div>
-                        <div class="span1"><a href="#grades">Notas</a></div>
-                        <div class="span1"><a href="#apis">APIs</a></div>
-                        <div class="span1"><a href="#webservices">Webservices</a></div>
-                    </div>
-                    </footer>
 
         <script src="js/jquery-1.8.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

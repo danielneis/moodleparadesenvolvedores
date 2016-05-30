@@ -4,6 +4,10 @@ body {
 img {
     margin-bottom: 1em;
 }
+h2 a,
+h2 a:hover,
+h2 a:active,
+h2 a:visited,
 h1 a,
 h1 a:hover,
 h1 a:active,
