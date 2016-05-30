@@ -3,38 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Moodle para desenvolvedores</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
         <link href="css/github.css" rel="stylesheet" type="text/css">
+        <link href="css/custom.css" rel="stylesheet" type="text/css">
         <style>
-        body {
-            padding-bottom: 2em;
-        }
-        img {
-            margin-bottom: 1em;
-        }
-        h1 a,
-        h1 a:hover,
-        h1 a:active,
-        h1 a:visited {
-            color: black;
-            text-decoration: none;
-        }
-        footer {
-            position: fixed;
-            font-size: 1.1em;
-            height: 2em;
-            bottom: 0;
-            width: 100%;
-            background-color: white;
-            border-top: 1px solid gray;
-        }
-        .span1 {
-            white-space: nowrap;
-        }
-        #license {
-            border-top: 1px solid gray;
-            padding-top: 0.5em
-        }
         </style>
     </head>
     <body>
@@ -46,35 +18,38 @@
             <div class="row-fluid">
             <h1><a id="home" href="#home">Olá, Moodle</a></h1>
 
-            <p>O <a href="http://www.moodle.org">Moodle</a> é um Ambiente Virtual de Ensino Aprendizagem (AVEA), também conhecido como Course Management System ou Learning Management System.</p>
+            <p>O <a href="https://www.moodle.org">Moodle</a> é um Ambiente Virtual de Ensino Aprendizagem (AVEA), também conhecido como Course Management System ou Learning Management System.</p>
             <p>O Moodle é um software livre, escrito principalmente em PHP e JavaScript. O projeto começou como trabalho de doutorado de Martin Dougiamas (ainda líder do projeto) e em 2012 completou sua primeria década de existência.</p>
             <p>Atualmente a maior parte do desenvolvimento e da gerência do projeto é feita no Moodle HQ, sede da Moodle Pty Ltd., em Perth, na Australia. Além dos mais de 50 funcionários no Moodle HQ, a "comunidade Moodle" é formada por pessoas ao redor de todo o mundo trabalhando para universidades, escolas, governos e empresas privadas.</p>
-            <p>O portal do projeto é construído utilizando o próprio Moodle e a interação entre a comunidade se dá principalmente através dos fóruns de discussão. O principal fórum é o <a href="https://moodle.org/mod/forum/view.php?id=55">General developer forum</a>, onde são tratadas a maior parte das questões de desenvolvimento/comportamento do Moodle de forma global. Existe também um <a href="http://moodle.org/mod/forum/view.php?id=50">General problems forum</a>, assim como fóruns para discussão de usabilidade, pedagogia e filosofia, para cada plugin que integra a distribuição padrão, fóruns de comunidades de <a href="https://moodle.org/course/category.php?id=3">outros países em diversos idiomas</a> (incluindo a comunidade <a href="https://moodle.org/course/view.php?id=35">brasileira</a>) e <a href="https://moodle.org/course/view.php?id=5">vários outros</a>.</p>
+            <p>O portal do projeto é construído utilizando o próprio Moodle e a interação entre a comunidade se dá principalmente através dos fóruns de discussão. O principal fórum é o <a href="https://moodle.org/mod/forum/view.php?id=55">General developer forum</a>, onde são tratadas a maior parte das questões de desenvolvimento/comportamento do Moodle de forma global. Existe também um <a href="https://moodle.org/mod/forum/view.php?id=50">General problems forum</a>, assim como fóruns para discussão de usabilidade, pedagogia e filosofia, para cada plugin que integra a distribuição padrão, fóruns de comunidades de <a href="https://moodle.org/course/category.php?id=3">outros países em diversos idiomas</a> (incluindo a comunidade <a href="https://moodle.org/course/view.php?id=35">brasileira</a>) e <a href="https://moodle.org/course/view.php?id=5">vários outros</a>.</p>
 
             <img src="img/moodle.org.home.png" class="thumbnail"/>
 
-            <p>Além dos fóruns, o Moodle conta também com um <a href="https://tracker.moodle.org">Bug Tracker</a> para gerenciar os bugs e contribuições relativas a código-fonte; uma <a href="http://docs.moodle.org">Wiki Oficial</a> com documentação cada vez mais ampla detalhada, para todo tipo de usuário, seja administrador, professor, aluno ou desenvolvedor; e uma <a href="http://lang.moodle.org">ferramenta para tradução</a>.</p>
+            <p>Além dos fóruns, o Moodle conta também com um <a href="https://tracker.moodle.org">Bug Tracker</a> para gerenciar os bugs e contribuições relativas a código-fonte; uma <a href="https://docs.moodle.org">Wiki Oficial</a> com documentação cada vez mais ampla detalhada, para todo tipo de usuário, seja administrador, professor, aluno ou desenvolvedor; e uma <a href="https://lang.moodle.org">ferramenta para tradução</a>.</p>
 
             <h2>Obtendo e instalando o Moodle</h2>
 
-            <p>No momento da construção deste material, a versão estável mais atual do Moodle</a> é a 2.4.1, e é a que vamos utilizar durante o curso. Ela está disponível em <a href="http://download.moodle.org">http://download.moodle.org</a> ou também no arquivo moodle-2.4.1.tgz no diretório "recursos", que acompanha este material.</p>
-            <p>O código-fonte no Moodle também está disponível no <a href="https://github.com">Github</a> em <a href="https://github.com/moodle/moodle">https://github.com/moodle/moodle</a> para navegar nos arquivos e no histórico de commits e também para clonar na sua máquina:</p>
+            <p>Você pode baixar o Moodle em <a href="https://download.moodle.org">https://download.moodle.org</a>.</p>
+            <p>O código-fonte do Moodle também está disponível no <a href="https://github.com">Github</a> em <a href="https://github.com/moodle/moodle">https://github.com/moodle/moodle</a> para navegar nos arquivos e no histórico de commits e também para clonar na sua máquina:</p>
 
             <pre><code data-language="bash">git clone git://github.com/moodle/moodle.git</code></pre>
 
-            <p>Para instalar o Moodle, basta descompactar o arquivo baixado (ou fazer o clone do repositório) em um diretório acessível pelo seu servidor web e acessá-lo via navegador. Antes de começar, verifique os pré-requisitos.</p>
+            <p>Para instalar o Moodle, basta descompactar o arquivo baixado (ou fazer o clone do repositório) em um diretório acessível pelo seu servidor web e acessá-lo via navegador.</p>
+            <p>Antes de começar, verifique os pré-requisitos.</p>
             
             <h3>Pré-requisitos</h3>
 
             <ul>
                 <li>Um servidor web funcionando (por exemplo, o Apache)</li>
                 <li>
-                    Várias extensões do PHP. Nesta versão:
+                    Várias extensões do PHP, como por exemplo:
                     <ul>
                         <li>intl</li>
                         <li>gd</li>
                         <li>xmlrpc</li>
                         <li>curl</li>
+                        <li>zip</li>
+                        <li>mcrypt</li>
                     </ul>
                     Vale lembrar que se você esquecer de instalar alguma extensão do PHP, é só instalá-la e retomar a instalação do Moodle.
                 </li>
@@ -85,7 +60,9 @@
 
             <h3>Instalação</h3>
 
-            <p>A instalação é tranquila, via interface web. Descompacte o código que você baixou num diretório acessível pelo seu servidor web (ou clone o repositório git) e acesse através do seu navegador.</p>
+            <p>A instalação é tranquila, via interface web. Basta acessar através do seu navegador o local onde você colocou o código do Moodle.</p>
+            <p>Digamos que você tenha colocado o código no diretório /var/www e que este seja o "document root" do seu servidor web, que é acessível via "localhost".</p>
+            <p>Nesse caso, basta você acessar no seu navegador a URL: <a href="localhost">http://localhost</a> que você verá a tela de instalação do Moodle.</p>
 
             <img src="img/moodle.installation.png" class="thumbnail"/>
 
@@ -97,9 +74,9 @@
 
             <p>Para finalizar a instalação (opcional no caso de um ambiente de desenvolvimento) é necessário configurar o CRON (uma tarefa que é executada periodicamente). No CRON é executado desde o envio de email dos fóruns até a criação de backups automáticos, quando agendados. Em um ambiente GNU/Linux, tipicamente é utilizado o crontab para fazer esta execução periódica. Uma linha padrão de crontab seria parecida com:</p> 
 
-            <pre><code>*/15 * * * * /usr/bin/php /path/to/moodle/admin/cli/cron.php > /dev/null</code></pre>
+            <pre><code>* * * * * /usr/bin/php /path/to/moodle/admin/cli/cron.php > /dev/null</code></pre>
 
-            <p><span class="warning">Se você tiver problemas na instalação, consulte a <a href="http://docs.moodle.org/23/en/Installing_Moodle">documentação oficial</a>, as <a href="http://docs.moodle.org/23/en/Installation_FAQ">perguntas frequentes</a> ou vá até o <a href="https://moodle.org/mod/forum/view.php?id=28">fórum de problemas na instalação (em inglês)</a> ou ao <a href="https://moodle.org/mod/forum/view.php?id=2404">fórum de problemas técnicos</a> da comunidade brasileira.</span></p>
+            <p><span class="warning">Se você tiver problemas na instalação, consulte a <a href="https://docs.moodle.org/en/Installing_Moodle">documentação oficial</a>, as <a href="https://docs.moodle.org/en/Installation_FAQ">perguntas frequentes</a> ou vá até o <a href="https://moodle.org/mod/forum/view.php?id=28">fórum de problemas na instalação (em inglês)</a> ou ao <a href="https://moodle.org/mod/forum/view.php?id=2404">fórum de problemas técnicos</a> da comunidade brasileira.</span></p>
 
             <h1><a id="overview">Visão geral</a></h1>
 
@@ -114,21 +91,21 @@
 
             <div class="alert alert-block alert-info">
             <ul>
-                <li><a href="http://docs.moodle.org/dev/Moodle_architecture">Documentação sobre a arquitetura do Moodle</a>.</li>
+                <li><a href="https://docs.moodle.org/dev/Moodle_architecture">Documentação sobre a arquitetura do Moodle</a>.</li>
                 <li><a href="https://docs.moodle.org/en/My_home">Documentação sobre a "Minha página inicial"</a>.</li>
             </ul>
             </div>
 
             <h2>Estrutura de um curso Moodle</h2>
 
-            <p>Um curso é formado basicamente por 4 conceitos: blocos, tópicos, recursos e atividades. Além, é claro, de seus participantes.</p>
+            <p>Um curso é formado basicamente por 4 conceitos: blocos, sessões, recursos e atividades. Além, é claro, de seus participantes.</p>
 
-            <p>Um blocos são módulos em forma de "caixas" que ficam nas laterais do curso. Eles tem funcionalidade variada: existem dois blocos padrão importantes, um de navegação e outro de configuração; outros blocos incluem o calendário, um bloco de notícias recentes com um resumo das últimas ocorrências no curso, bloco para mensagens instantânea, etc.</p>
+            <p>Blocos são módulos em forma de "caixas" que ficam nas laterais do curso. Eles tem funcionalidade variada: existem dois blocos padrão importantes, um de navegação e outro de configuração; outros blocos incluem o calendário, um bloco de notícias recentes com um resumo das últimas ocorrências no curso, bloco para mensagens instantânea, etc.</p>
 
-            <p>Na parte central de um curso Moodle estão as sessões. Todo curso tem pelo menos uma sessão (a sessão 0) e cada uma pode representar uma semana de aula, um dia, um tópico de uma disciplina, dependendo do <a href="http://docs.moodle.org/24/en/Course_formats">formato de curso</a> escolhido. Cada tópico é composto por um sumário e uma lista de recursos e atividades.</p>
+            <p>Na parte central de um curso Moodle estão as sessões. Todo curso tem pelo menos uma sessão (a sessão 0) e cada uma pode representar uma semana de aula, um dia, um tópico de uma disciplina, dependendo do <a href="https://docs.moodle.org/en/Course_formats">formato de curso</a> escolhido. Cada tópico é composto por um sumário e uma lista de recursos e atividades.</p>
 
             <p>Recursos são materiais de referência, como vídeos, PDFs, URLs, etc.</p>
-            <p>Atividades são diversas formas de interação com os alunos geralmente com objetivo de medir o aprendizado.</p>
+            <p>Atividades são diversas formas de interação com os alunos, geralmente com objetivo de medir o aprendizado.</p>
             <p>A seguir, veremos mais detalhadamente estes e outros tipos de componentes de um ambiente Moodle.</p>
 
             <p>Um exemplo de curso no Moodle (retirado da <a href="https://docs.moodle.org/en/Courses">documentação oficial</a>)</p>
@@ -136,9 +113,8 @@
 
             <div class="alert alert-block alert-info">
             <ul>
-                <li><a href="http://docs.moodle.org/dev/Developer_documentation">Documentação oficial para desenvolvedores</a></li>
-                <li><a href="http://phpdocs.moodle.org">PHP Doc do Moodle</a></li>
-                <li><a href="http://docs.moodle.org/dev/Development_hints_and_tips">Dicas para desenvolvedores</a> ("expand moodle docs" ;).</li>
+                <li><a href="https://docs.moodle.org/dev/Developer_documentation">Documentação oficial para desenvolvedores</a></li>
+                <li><a href="https://docs.moodle.org/dev/Development_hints_and_tips">Dicas para desenvolvedores</a> ("expand moodle docs" ;).</li>
             </ul>
             </div>
             </div>
@@ -148,45 +124,47 @@
 
             <ul>
                 <li>Activities</li>
-                <li>Adminbookmarks</li>
-                <li>Blogmenu</li>
-                <li>Blogtags</li>
+                <li>Admin bookmarks</li>
+                <li>Blog menu</li>
+                <li>Blog recent</li>
+                <li>Blog tags</li>
                 <li>Calendar</li>
                 <li>Comments</li>
-                <li>Communityfinder</li>
-                <li>Coursecompletionstatus</li>
-                <li>Courseoverview</li>
-                <li>Course/sitesummary</li>
+                <li>Community finder</li>
+                <li>Course completion status</li>
+                <li>Course overview</li>
+                <li>Course/site summary</li>
                 <li>Courses</li>
-                <li>Flickr</li>
+                <li>Feedback</li>
+                <li>Global Search</li>
                 <li>HTML</li>
-                <li>Latestnews</li>
-                <li>Loggedinuser</li>
+                <li>Latest news</li>
+                <li>Logged in users</li>
                 <li>Login</li>
-                <li>Mainmenu</li>
-                <li>Menteesblock</li>
+                <li>Main menu</li>
+                <li>Mentees</li>
                 <li>Messages</li>
-                <li>Myprivatefiles</li>
+                <li>My private files</li>
                 <li>Navigation</li>
-                <li>Networkservers</li>
-                <li>Onlineusers</li>
+                <li>Network servers</li>
+                <li>Online users</li>
                 <li>People</li>
-                <li>Quizresults</li>
-                <li>Randomglossaryentry</li>
-                <li>Recentactivity</li>
-                <li>Recentblogentries</li>
-                <li>RemoteRSSfeeds</li>
-                <li>Searchforums</li>
-                <li>Sectionlinks</li>
-                <li>Selfcompletion</li>
+                <li>Quiz results</li>
+                <li>Random glossary entry</li>
+                <li>Recent activity</li>
+                <li>Recent blog entries</li>
+                <li>Remote RSS feeds</li>
+                <li>Search forums</li>
+                <li>Section links</li>
+                <li>Self completion</li>
                 <li>Settings</li>
-                <li>Socialactivities</li>
+                <li>Social activities</li>
                 <li>Tags</li>
-                <li>Upcomingevents</li>
+                <li>Upcoming events</li>
                 <li>Youtube</li>
             </ul>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Blocks">Documentação oficial sobre blocos</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Blocks">Documentação oficial sobre blocos</a></p>
 
             <h2>Blocos para desenvolvedores</a></h2>
 
@@ -208,9 +186,9 @@
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Blocks">Documentação oficial de blocos para desenvolvedores</a></li>
+            <li><a href="https://docs.moodle.org/dev/Blocks">Documentação oficial de blocos para desenvolvedores</a></li>
             <li><a href="https://github.com/danielneis/moodle-block_newblock">Modelo de bloco no Github</a></li>
-            <li><a href="http://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
+            <li><a href="https://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
             </ul>
             </div>
             </div>
@@ -237,24 +215,24 @@
             <li>Workshop</li>
             </ul>       
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Activities">Documentação oficial sobre atividades</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Activities">Documentação oficial sobre atividades</a></p>
 
             <h2>Atividades para desenvolvedores</h2>
 
-            <p>O módulos de atividades ficam todos no diretório "mod", na raiz do Moodle.</p>
-            <p>Cada módulo é um subdiretório e consiste em vários arquivos obrigatórios e quaisquer outros arquivos que o módulo precise. Abaixo, um exemplo de estrutura do módulo certificado.</p>
+            <p>Os módulos de atividades ficam todos no diretório "mod", na raiz do Moodle.</p>
+            <p>Cada módulo é um subdiretório com vários arquivos obrigatórios e quaisquer outros arquivos que o módulo precise. Abaixo, um exemplo de estrutura do módulo certificado.</p>
 
             <img src="img/Activities_file_structure_example.jpg" class="thumbnail"/>
 
             <h4>Diretório de Backup</h4>
 
-            <p>No diretório de backup ficam os arquivos responsáveis por salvar os dados do seu módulo durante o backup e restaurá-los durante a restauração. O Moodle oferece uma <a href="http://docs.moodle.org/dev/Backup_2.0_for_developers">API de Backup</a> e uma <a href="http://docs.moodle.org/dev/Restore_2.0_for_developers">API de Restore</a>. Neste curso, não vamos estudar estas APIs pois a implementação de backup/restore de um plugin não é obrigatório e muitas vezes é bastante complexa.</p>
+            <p>No diretório de backup ficam os arquivos responsáveis por salvar os dados do seu módulo durante o backup e restaurá-los durante a restauração. O Moodle oferece uma <a href="https://docs.moodle.org/dev/Backup_2.0_for_developers">API de Backup</a> e uma <a href="https://docs.moodle.org/dev/Restore_2.0_for_developers">API de Restore</a>. Neste curso, não vamos estudar estas APIs pois a implementação de backup/restore de um plugin não é obrigatório e muitas vezes é bastante complexa.</p>
 
             <h4>db/access.php</h4>
             <p>Este arquivo define as capabilities criadas pelo módulo</p>
 
             <h4>db/install.xml</h4>
-            <p>Este arquivo é utilizado na instalação de seu módulo. Nele estão definidas as tabelas (e campos) que serão criadas pelo módulo. Se o seu módulo não precisa de novas tabelas, este arquivo não é necessário. Para criar este arquivo, veja a documentação sobre o <a href="http://docs.moodle.org/dev/XMLDB_editor">XMLDB Editor</a>.</p>
+            <p>Este arquivo é utilizado na instalação de seu módulo. Nele estão definidas as tabelas (e campos) que serão criadas pelo módulo. Se o seu módulo não precisa de novas tabelas, este arquivo não é necessário. Para criar este arquivo, veja a documentação sobre o <a href="https://docs.moodle.org/dev/XMLDB_editor">XMLDB Editor</a>.</p>
             <p>É recomendável que o módulo tenha pelo menos uma tabela com o mesmo nome, com os campos "id", "name" e "course".</p>
 
             <h4>db/upgrade.php</h4>
@@ -295,7 +273,7 @@
 
             <h4>Pix folder</h4>
             <p>Este diretório guarda o ícone que você quer que o Moodle mostre ao lado do nome do seu módulo. O nome do arquivo deve ser "icon.gif" e é mostrado com uma resolução de 16x16. Você pode também guardar outras imagens utilizadas pelo seu módulo neste diretório.</p>
-            <p>A versão 2.4 do Moodle introduziu ícones em SVG para os módulos padrão. Veja a <a href="http://docs.moodle.org/dev/Moodle_icons_2.4">documentação oficial</a> para detalhes sobre como utilizá-los.</p>
+            <p>A versão 2.4 do Moodle introduziu ícones em SVG para os módulos padrão. Veja a <a href="https://docs.moodle.org/dev/Moodle_icons_2.4">documentação oficial</a> para detalhes sobre como utilizá-los.</p>
 
             <h4>lib.php</h4>
             <p>Este arquivo é destinado às principais funções do módulo para funcionar integrado com o Moodle. Pelo menos três funções devem ser implementadas pelo módulo:</p>
@@ -342,7 +320,7 @@ class mod_certificate_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 }</code></pre>
-            <p>Assim como em outros formulários do Moodle, é possível adicionar validação. Para mais informações sobre como criar formulários, acesse a <a href="http://docs.moodle.org/dev/Form_API">documentação oficial sobre "Forms API"</a>.</p>
+            <p>Assim como em outros formulários do Moodle, é possível adicionar validação. Para mais informações sobre como criar formulários, acesse a <a href="https://docs.moodle.org/dev/Form_API">documentação oficial sobre "Forms API"</a>.</p>
 
             <h4>index.php</h4>
             <p>Esta página é utilizada pelo Moodle para listar todas as instâncias do seu módulo em um curso específico (o id deste curso é informado via GET).</p>
@@ -372,10 +350,10 @@ if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance)))
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Activity_modules">Documentação oficial sobre atividades para desenvolvedores</a></li>
-            <li><a href="http://docs.moodle.org/dev/DDL_functions">Documentação oficial sobre a API de definição dados</a></li>
-            <li><a href="http://docs.moodle.org/dev/Installing_and_upgrading_plugin_database_tables">Documentação oficial sobre atualização e instalação de plugins</a></li>
-            <li><a href="http://docs.moodle.org/dev/version.php">Documentação oficial sobre arquivos version.php</a></li>
+            <li><a href="https://docs.moodle.org/dev/Activity_modules">Documentação oficial sobre atividades para desenvolvedores</a></li>
+            <li><a href="https://docs.moodle.org/dev/DDL_functions">Documentação oficial sobre a API de definição dados</a></li>
+            <li><a href="https://docs.moodle.org/dev/Installing_and_upgrading_plugin_database_tables">Documentação oficial sobre atualização e instalação de plugins</a></li>
+            <li><a href="https://docs.moodle.org/dev/version.php">Documentação oficial sobre arquivos version.php</a></li>
             <li><a href="https://github.com/moodlehq/moodle-mod_newmodule">Modelo de módulo de atividade no Github</a></li>
             </ul>
             </div>
@@ -393,7 +371,7 @@ if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance)))
             <li>Page - The student sees a single, scrollable screen that a teacher creates with the robust HTML editor</li>
             <li>URL - You can send the student to any place they can reach on their web browser, for example Wikipedia </li>
             </ul>
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Resources">Documentação oficial</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Resources">Documentação oficial</a></p>
             </div>
 
             <div class="row-fluid">
@@ -406,9 +384,9 @@ print_object(get_plugin_types());</code></pre>
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Plugins">Lista completa dos plugins oficiais</a></li>
-            <li>Você encontra muitos plugins legais na <a href="http://moodle.org/plugins">Moodle Plugins database</a>.</li>
-            <li>Para se manter atualizado com as novidades, você pode assinar o <a href="http://moodle.org/rss/file.php/50/1b51bf7f3cab9689af042af1ff4a07f0/local_plugins/recent_plugins/0/rss.xml">RSS</a> ou seguir o <a href="http://twitter.com/moodleplugins">@moodleplugins no Twitter</a>.</li>
+            <li><a href="https://docs.moodle.org/dev/Plugins">Lista completa dos plugins oficiais</a></li>
+            <li>Você encontra muitos plugins legais na <a href="https://moodle.org/plugins">Moodle Plugins database</a>.</li>
+            <li>Para se manter atualizado com as novidades, você pode assinar o <a href="https://moodle.org/rss/file.php/50/1b51bf7f3cab9689af042af1ff4a07f0/local_plugins/recent_plugins/0/rss.xml">RSS</a> ou seguir o <a href="https://twitter.com/moodleplugins">@moodleplugins no Twitter</a>.</li>
             </div>
 
             </div>
@@ -425,9 +403,9 @@ print_object(get_plugin_types());</code></pre>
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/en/Category:Capabilities">Índice das capabilities</a></li>
-            <li><a href="http://docs.moodle.org/en/Roles_and_permissions">Documentação oficial sobre papéis e permissões</a></li>
-            <li><a href="http://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrições</a></li>
+            <li><a href="https://docs.moodle.org/en/Category:Capabilities">Índice das capabilities</a></li>
+            <li><a href="https://docs.moodle.org/en/Roles_and_permissions">Documentação oficial sobre papéis e permissões</a></li>
+            <li><a href="https://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrições</a></li>
             </ul>
             </div>
 
@@ -474,8 +452,8 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Access_API">Documentação oficial sobre a "Access API"</a>.</li>
-            <li><a href="http://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
+            <li><a href="https://docs.moodle.org/dev/Access_API">Documentação oficial sobre a "Access API"</a>.</li>
+            <li><a href="https://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
             </ul>
             </div>
             </div>
@@ -485,21 +463,21 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <p>Listar plugins de autenticação</p>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Authentication">Documentação oficial sobre autenticação</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Authentication">Documentação oficial sobre autenticação</a></p>
 
             <h2>Autenticação para desenvolvedores</h2>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Authentication_plugins">Plugins de autenticação para desenvolvedores</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Authentication_plugins">Plugins de autenticação para desenvolvedores</a></p>
 
             </div>
 
             <div class="row-fluid">
             <h1><a id="enrol">Inscrição</a></h1>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrição</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrição</a></p>
 
             <h2>Inscrição para desenvolvedores</h2>
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Enrolment_plugins">Plugins de inscrição para desenvolvedores</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Enrolment_plugins">Plugins de inscrição para desenvolvedores</a></p>
             </div>
 
             <div class="row-fluid">
@@ -511,7 +489,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <img src="img/Grades_grader_report_with_categories_1.png" class="thumbnail" />
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/en/Gradebook">Documentação oficial sobre o livro de notas</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Gradebook">Documentação oficial sobre o livro de notas</a></p>
 
             <h2>Relatório de notas para desenvolvedores</h2>
 
@@ -523,8 +501,8 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Gradebook_API">Documentação oficial sobre notas para desenvolvedores</a></li>
-            <li><a href="http://docs.moodle.org/dev/Gradebook_reports">Documentação oficial sobre relatórios de notas para desenvolvedores.</a></li>
+            <li><a href="https://docs.moodle.org/dev/Gradebook_API">Documentação oficial sobre notas para desenvolvedores</a></li>
+            <li><a href="http2://docs.moodle.org/dev/Gradebook_reports">Documentação oficial sobre relatórios de notas para desenvolvedores.</a></li>
             <li><a href="https://github.com/danielneis/moodle-gradereport_newgradereport">Template de relatório de notas no Github.</a></li>
             </ul>
             </div>
@@ -533,7 +511,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             <div class="row-fluid">
             <h1><a id="apis">APIs</a></h1>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></p>
 
             <h2>Database Abstraction Layer</h2>
 
@@ -594,7 +572,7 @@ $DB->update_record('user', $user);</code></pre>
      $transaction = $DB->start_delegated_transaction(); //If an exception is thrown in the below code, all DB queries in this code will be rollback.
      $transaction->allow_commit();</code></pre>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Data_manipulation_API">Documentação oficial sobre a API de acesso à base de dados</a>.</p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Data_manipulation_API">Documentação oficial sobre a API de acesso à base de dados</a>.</p>
 
             <h2>String</h2>
 
@@ -620,7 +598,7 @@ get_string('identificador_da_string', 'module_pluginlangfilename', $obj);
 // No arquivo de tradução, a substituição é feita da seguinte forma:
 $string['identificador_da_string'] = 'Minha string com valor {$a->number} e também {$a->foo}';</code></pre>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/String_API">Documentação oficial sobre a String API</a>.</p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/String_API">Documentação oficial sobre a String API</a>.</p>
 
             <h2>Page</h2>
             <p>A Page API é parte integrante de todas as páginas do Moodle. Ela permite que o desenvolvedor defina coisas como título da página, o cabeçalho inicial, em que ponto da navegação o usuário está e qual layout a página deve utilizar.</p>
@@ -655,7 +633,7 @@ $PAGE->set_context(context_module::instance($moduleid));</code></pre>
             <pre><code data-language="php">$PAGE->add_body_class($strcssclass);
 $PAGE->add_body_classes($arrayofclasses);</code></pre>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Page_API">Documentação oficial sobre a Page API</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Page_API">Documentação oficial sobre a Page API</a></p>
 
             <h2>Navigation</h2>
             <p>A "Navigation API" permite manipular o sistema de navegação utilizado no Moodle. A navegação está disponível através do objeto $PAGE e usa a informação deste para gerar a estrutura de navegação do site. Os blocos de navegação e configurações são interpretações da estrutura que o Moodle cria. A estrutura de navegação está disponível em três variáveis:</p>
@@ -673,7 +651,7 @@ $PAGE->add_body_classes($arrayofclasses);</code></pre>
 $PAGE->navbar->add(get_string('preview'), new moodle_url('/a/link/if/you/want/one.php'));
 $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/want/one.php'));</code></pre>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Navigation_API">Documentação oficial sobre a Navigation API</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Navigation_API">Documentação oficial sobre a Navigation API</a></p>
 
             <h2>Output</h2>
 
@@ -684,7 +662,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
             <p>Para imprimir o rodapé, é igualmente simples. Vale lembrar que se você esquecer de chamar esta função ao final da página, o Moodle lançará um "warning". O mesmo acontece se você chamar esta função mais que uma vez na mesma página.</p>
             <pre><code data-language="php">echo $OUTPUT->footer();</code></pre>
 
-            <p class="alert alert-info"><a href="docs.moodle.org/dev/Output_API">Documentação oficial sobre Output API</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Output_API">Documentação oficial sobre Output API</a></p>
 
             <h2>Logging</h2>
 
@@ -698,9 +676,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 get_logs_usercourse($userid, $courseid, $coursestart)
 get_logs_userday($userid, $courseid, $daystart)</code></pre>
 
-            <p class="alert alert-info"><a href="http://docs.moodle.org/dev/Logging_API">Documentação oficial sobre a API de logs</a>.</p>
-
-            <!--<h2>Form</h2>-->
+            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Logging_API">Documentação oficial sobre a API de logs</a>.</p>
 
             </div>
 
@@ -785,8 +761,9 @@ $services = array(
             <p>Agora, basta seguir os passos da interface do Moodle acessando o bloco Administração > Administração do Site > Webservices > Resumo.</p>
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="http://docs.moodle.org/dev/Category:Web_Services">Documentação oficial sobre Webservices</a></li>
-            <li><a href="http://docs.moodle.org/dev/Web_services_files_handling">Documentação oficial sobre upload e download de arquivos via Webservices</a></li>
+            <li><a href="https://docs.moodle.org/dev/Category:Web_Services">Documentação oficial sobre Webservices</a></li>
+            <li><a href="https://docs.moodle.org/dev/Web_service_API_functions">Documentação das funções disponíveis do "núcelo" como Webservices</a></li>
+            <li><a href="https://docs.moodle.org/dev/Web_services_files_handling">Documentação oficial sobre upload e download de arquivos via Webservices</a></li>
             <li><a href="https://github.com/moodlehq/sample-ws-clients">Templates de clientes no Github</a></li>
             <li><a href="https://github.com/moodlehq/moodle-local_wstemplate">Template de webservice no Github</a></li>
             </ul>
@@ -796,7 +773,7 @@ $services = array(
 
         <div id="license">
         <center>
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
             <p>Autor:</p>
             <ul>
                 <li>Daniel Neis &lt;danielneis@gmail.com&gt;</li>
@@ -824,12 +801,6 @@ $services = array(
         <script src="js/bootstrap.min.js"></script>
         <script src="js/rainbow-custom.min.js"></script>
         <script type="text/javascript">
-        $(document).ready(function() {
-                function showHiddenParagraphs() {
-                $("p.hidden").fadeIn(500);
-                }
-                setTimeout(showHiddenParagraphs, 1000);
-        });
         if (location.hash) shiftWindow();
         window.addEventListener("hashchange", shiftWindow);
         </script>
