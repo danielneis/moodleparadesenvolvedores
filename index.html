@@ -54,7 +54,7 @@
 
             <pre><code data-language="bash">git clone git://github.com/moodle/moodle.git</code></pre>
 
-            <h2><a id="install">Instalação</h2>
+            <h2><a id="install">Instalando o Moodle</a></h2>
 
             <p>Para instalar o Moodle, basta descompactar o arquivo baixado (ou fazer o clone do repositório) em um diretório acessível pelo seu servidor web e acessá-lo via navegador.</p>
             <p>Antes de começar, verifique os pré-requisitos.</p>
@@ -413,8 +413,8 @@ print_object(get_plugin_types());</code></pre>
 
             <div class="alert alert-block alert-info">
             <ul>
-            <li><a href="https://docs.moodle.org/dev/Plugins">Lista completa dos plugins oficiais</a></li>
-            <li>Você encontra muitos plugins legais na <a href="https://moodle.org/plugins">Moodle Plugins database</a>.</li>
+            <li><a href="https://docs.moodle.org/dev/Plugins">Lista completa dos tipos de plugins</a>.</li>
+            <li>Na <a href="https://moodle.org/plugins">Moodle Plugins database</a> existem mais de mil plugins de terceiros para download.</li>
             <li>Para se manter atualizado com as novidades, você pode assinar o <a href="https://moodle.org/rss/file.php/50/1b51bf7f3cab9689af042af1ff4a07f0/local_plugins/recent_plugins/0/rss.xml">RSS</a> ou seguir o <a href="https://twitter.com/moodleplugins">@moodleplugins no Twitter</a>.</li>
             </div>
 
@@ -539,8 +539,6 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <div class="row-fluid">
             <h2><a id="apis">APIs</a></h2>
-
-            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></p>
 
             <h3>Database Abstraction Layer</h3>
 
@@ -705,7 +703,12 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 get_logs_usercourse($userid, $courseid, $coursestart)
 get_logs_userday($userid, $courseid, $daystart)</code></pre>
 
-            <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Logging_API">Documentação oficial sobre a API de logs</a>.</p>
+            <div class="alert alert-info">
+                <ul>
+                <li><a href="https://docs.moodle.org/dev/Logging_API">Documentação oficial sobre a API de logs</a>.</li>
+                <li><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a>.</li>
+                </ul>
+            </div>
 
             </div>
 
