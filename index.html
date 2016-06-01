@@ -205,10 +205,41 @@
             <p>Este arquivo guarda a definição da classe do bloco e é responsável pelo seu gerenciamento e também pela geração do conteúdo a ser apresentado para o usuário</p>
 
             <h4>db/access.php</h4>
-            <p>Este arquivo define as capabilities criadas pelo bloco</p>
+            <p>Este arquivo define as capabilities criadas pelo bloco. Pelo menos duas capabilities são necessárias: "myaddinstance" e "addinstance".</p>
+            <pre><code data-language="php">defined('MOODLE_INTERNAL') || die();
 
-            <h4>lang/en/block_simplehtml.php</h4>
-            <p>Este arquivo define as "strings" do seu módulo no idioma inglês. Se você for publicar este bloco na Moodle Plugin Database, você poderá traduzí-lo com o AMOS em lang.moodle.org, caso contrário crie o arquivo lang/pt_br/block_simplehtml.php para traduzí-lo para o português.</p>
+$capabilities = array(
+
+    'block/newblock:myaddinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => array(
+            'user' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/my:manageblocks'
+    ),
+
+    'block/newblock:addinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+);
+</code></pre>
+
+            <h4>Diretório lang</h4>
+            <p>Neste diretório são guardados os idiomas. Você deve criar dentro dele o diretório "en" e lá o arquivo "block_newblock.php" com as strings em inglês.</p>
+            <p>Existe 1 string que deve ser declarada obrigatoriamente: "pluginname".</p>
+            <p>Se você for publicar este bloco na Moodle Plugin Database, você poderá traduzí-lo com o AMOS em <a href="https://lang.moodle.org">lang.moodle.org</a>, caso contrário crie o arquivo lang/pt_br/block_simplehtml.php para traduzí-lo para o português.</p>
+            <pre><code data-language="php">$string['pluginname'] = 'Newblock';</code></pre>
 
             <h4>version.php</h4>
             <p>Este arquivo guarda a versão do plugin, a versão mínima do Moodle exigida, quais plugins são necessários para que este bloco funcione, informações sobre período de execução via cron (caso existir) e outras configurações.</p>
@@ -258,7 +289,23 @@
             <p>No diretório de backup ficam os arquivos responsáveis por salvar os dados do seu módulo durante o backup e restaurá-los durante a restauração. O Moodle oferece uma <a href="https://docs.moodle.org/dev/Backup_2.0_for_developers">API de Backup</a> e uma <a href="https://docs.moodle.org/dev/Restore_2.0_for_developers">API de Restore</a>. Neste curso, não vamos estudar estas APIs pois a implementação de backup/restore de um plugin não é obrigatório e muitas vezes é bastante complexa.</p>
 
             <h4>db/access.php</h4>
-            <p>Este arquivo define as capabilities criadas pelo módulo</p>
+            <p>Este arquivo define as capabilities criadas pelo módulo. Pelo menos uma capability é necessária: "addinstance".</p>
+            <pre><code data-language="php">defined('MOODLE_INTERNAL') || die();
+
+// Modify capabilities as needed and remove this comment.
+$capabilities = array(
+    'mod/newmodule:addinstance' => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+        'clonepermissionsfrom' => 'moodle/course:manageactivities'
+    ),
+);
+</code></pre>
 
             <h4>db/install.xml</h4>
             <p>Este arquivo é utilizado na instalação de seu módulo. Nele estão definidas as tabelas (e campos) que serão criadas pelo módulo. Se o seu módulo não precisa de novas tabelas, este arquivo não é necessário. Para criar este arquivo, veja a documentação sobre o <a href="https://docs.moodle.org/dev/XMLDB_editor">XMLDB Editor</a>.</p>
@@ -289,7 +336,8 @@
         // Certificate savepoint reached.
         upgrade_mod_savepoint(true, 2012091800, 'certificate');
     }
-}</code></pre>
+}
+</code></pre>
             <p>Então, para atualizar seu módulo é necessário:</p>
             <ul>
             <li>Alterar o "db/install.xml" para que novas instalações tenham a nova estrutura</li>
@@ -299,6 +347,11 @@
 
             <h4>Diretório "lang"</h4>
             <p>Assim como no bloco, este diretório guarda os pacotes de idioma de seu módulo. Aqui dentro, cada idioma é um subdiretório ("en", "pt_br", "de", etc.) e dentro de cada diretório deve existir um arquivo com o mesmo nome do módulo (ex. lang/pt_br/certificate.php).</p>
+            <p>Existem 3 strings que devem ser declaradas: "pluginname", "modulename" e "modulenameplural".</p>
+            <pre><code data-language="php">$string['pluginname'] = 'Newblock';
+$string['modulename'] = 'newmodule';
+$string['modulenameplural'] = 'newmodules';
+</code></pre>
 
             <h4>Pix folder</h4>
             <p>Este diretório guarda o ícone que você quer que o Moodle mostre ao lado do nome do seu módulo. O nome do arquivo deve ser "icon.gif" e é mostrado com uma resolução de 16x16. Você pode também guardar outras imagens utilizadas pelo seu módulo neste diretório.</p>
