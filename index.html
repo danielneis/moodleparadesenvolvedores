@@ -788,7 +788,30 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <h2><a id="auth">Autenticação</a></h2>
 
-            <p>Listar plugins de autenticação</p>
+            <p>Plugins de autenticação permitem que os usuários do Moodle façam "login" no ambiente de diferentes formas.</p>
+            <p>O plugin de autenticação mais utilizado, que vem como padrão, é o "manual", onde a identificação do usuário e a sua senha ficam guardados na base de dados do Moodle e o usuário os fornece via formulário toda vez que quiser fazer login.</p>
+            <p>É possível também que ao invés de guardar essas informações na base do Moodle, a autenticação possa ser feita num sistema remoto, como outra base de dados, um servidor LDAP, um servidor CAS, ou até mesmo usando redes sociais (com plugins de terceiros).</p>
+            <p>Abaixo, a lista de plugins de autenticação padrão com o Moodle.</p>
+
+            <ul>
+                <li>CAS</li>
+                <li>Base de dados externa</li>
+                <li>Email</li>
+                <li>FirstClass</li>
+                <li>IMAP</li>
+                <li>LDAP</li>
+                <li>LTI</li>
+                <li>Manual</li>
+                <li>MNET</li>
+                <li>NNTP</li>
+                <li>No login</li>
+                <li>None</li>
+                <li>PAM</li>
+                <li>POP3</li>
+                <li>Radius</li>
+                <li>Shibboleth</li>
+                <li>Webservice</li>
+            </ul>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/en/Authentication">Documentação oficial sobre autenticação</a></p>
 
@@ -797,6 +820,28 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Authentication_plugins">Plugins de autenticação para desenvolvedores</a></p>
 
             <h2><a id="enrol">Inscrição</a></h2>
+
+            <p>Plugins de Inscrição permitem que os usuários sejam inscritos nos cursos de diversas formas.</p>
+            <p>As mais conhecidas são a manual, onde um usuário com permissão inscreve outros usuários num curso; e a autoinscrição, onde um usuário pode inscrever ele mesmo num curso.</p>
+            <p>Existem outros plugins de inscrição que permitem, por exemplo, criar cursos e inscrever usuários a partir de um banco de dados externo, um servidor LDAP.</p>
+            <p>Outro uso dos plugins de inscrição é para permitir acesso de convidados, sincronizar coortes com cursos e ligar "meta cursos" de forma que usuários de um curso sejam automaticamente inscrito em outro.</p>
+            <p>Abaixo, a lista de plugins de inscrição padrão do Moodle:</p>
+
+            <ul>
+                <li>Categoria</li>
+                <li>Coorte</li>
+                <li>Base de dados externa</li>
+                <li>Flatfile</li>
+                <li>Acessar como convidado</li>
+                <li>IMS enterprise</li>
+                <li>LDAP</li>
+                <li>LTI</li>
+                <li>Manual</li>
+                <li>Meta</li>
+                <li>MNET</li>
+                <li>Paypal</li>
+                <li>Auto-inscrição</li>
+            </ul>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/en/Enrolments">Documentação oficial sobre inscrição</a></p>
 
@@ -835,9 +880,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <h2><a id="apis">APIs</a></h2>
 
-            <h3>Trabalhando com o banco de dados</h3>
-
-            <h4>Manipulação de dados</h4>
+            <h3>Banco de dados</h3>
 
             <p>A manipulação da base de dados no Moodle é feita através de um objeto global $DB. Abaixo vemos alguns exemplos de uso desse objeto.</p>
 
