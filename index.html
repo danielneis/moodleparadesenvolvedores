@@ -11,7 +11,7 @@
     </head>
     <body>
 
-        <a href="https://github.com/danielneis/moodleparadesenvolvedores"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        <a href="https://github.com/danielneis/moodleparadesenvolvedores"><img style="position: absolute; top: 0; right: 0; border: 0;" src="img/forkmeongithub.png" alt="Fork me on GitHub"></a>
 
         <div class="container">
 
@@ -58,7 +58,7 @@
 
             <p>Para instalar o Moodle, basta descompactar o arquivo baixado (ou fazer o clone do repositório) em um diretório acessível pelo seu servidor web e acessá-lo via navegador.</p>
             <p>Antes de começar, verifique os pré-requisitos.</p>
-            
+
             <h3>Pré-requisitos</h3>
 
             <ul>
@@ -91,7 +91,7 @@
 
             <pre><code data-language="bash">/usr/bin/php /path/to/moodle/admin/cli/install.php</code></pre>
 
-            <p>Para finalizar a instalação (opcional no caso de um ambiente de desenvolvimento) é necessário configurar o CRON (uma tarefa que é executada periodicamente). No CRON é executado desde o envio de email dos fóruns até a criação de backups automáticos, quando agendados. Em um ambiente GNU/Linux, tipicamente é utilizado o crontab para fazer esta execução periódica. Uma linha padrão de crontab seria parecida com:</p> 
+            <p>Para finalizar a instalação (opcional no caso de um ambiente de desenvolvimento) é necessário configurar o CRON (uma tarefa que é executada periodicamente). No CRON é executado desde o envio de email dos fóruns até a criação de backups automáticos, quando agendados. Em um ambiente GNU/Linux, tipicamente é utilizado o crontab para fazer esta execução periódica. Uma linha padrão de crontab seria parecida com:</p>
 
             <pre><code>* * * * * /usr/bin/php /path/to/moodle/admin/cli/cron.php > /dev/null</code></pre>
 
@@ -242,7 +242,7 @@
             <li>Survey</li>
             <li>Wiki</li>
             <li>Workshop</li>
-            </ul>       
+            </ul>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/en/Activities">Documentação oficial sobre atividades</a></p>
 
@@ -285,7 +285,7 @@
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
- 
+
         // Certificate savepoint reached.
         upgrade_mod_savepoint(true, 2012091800, 'certificate');
     }
@@ -307,22 +307,108 @@
             <h4>lib.php</h4>
             <p>Este arquivo é destinado às principais funções do módulo para funcionar integrado com o Moodle. Pelo menos três funções devem ser implementadas pelo módulo:</p>
 
-            <pre><code data-language="php">function mymodule_add_instance($mymodule);
-function mymodule_update_instance($mymodule);
-function mymodule_delete_instance($id);</code></pre>
+            <pre><code data-language="php">function newmodule_add_instance(stdClass $newmodule, mod_newmodule_mod_form $mform = null) {
+    global $DB;
 
-            <p>A função "mymodule_add_instance" recebe os dados vindos do mod_form.php (discutido em seguida) como um objeto quando uma atividade é criada. Ela é chamada apenas quando o módulo é criado (adicionado ao curso) então aqui deve ter a lógica de criação da atividade.</p>
-            <p>A função "mymodule_update_instance" recebe os dados vindos do mod_form.php como um objeto sempre que você alterar a atividade e submeter o formulário. O id da instância que você está editando é passado como um atributo do objeto e você pode utilizá-lo para editar quaisquer valores na base de dados para aquela instância.</p> 
-            <p>A função "mymodule_delete_instance" recebe o id da instância do seu módulo de forma que você pode utilizá-lo para remover os registros relacionados do banco de dados.</p>
+    $newmodule->timecreated = time();
+    // You may have to add extra stuff in here.
 
+    $newmodule->id = $DB->insert_record('newmodule', $newmodule);
+
+    newmodule_grade_item_update($newmodule);
+
+    return $newmodule->id;
+}
+
+function newmodule_update_instance(stdClass $newmodule, mod_newmodule_mod_form $mform = null) {
+    global $DB;
+
+    $newmodule->timemodified = time();
+    $newmodule->id = $newmodule->instance;
+
+    // You may have to add extra stuff in here.
+
+    $result = $DB->update_record('newmodule', $newmodule);
+
+    newmodule_grade_item_update($newmodule);
+
+    return $result;
+}
+
+function newmodule_delete_instance($id) {
+    global $DB;
+
+    if (! $newmodule = $DB->get_record('newmodule', array('id' => $id))) {
+        return false;
+    }
+
+    // Delete any dependent records here.
+
+    $DB->delete_records('newmodule', array('id' => $newmodule->id));
+
+    newmodule_grade_item_delete($newmodule);
+
+    return true;
+}
+</code></pre>
+
+            <p>A função "newmodule_add_instance" recebe os dados vindos do mod_form.php (discutido em seguida) como um objeto quando uma atividade é criada. Ela é chamada apenas quando o módulo é criado (adicionado ao curso) então aqui deve ter a lógica de criação da atividade.</p>
+            <p>A função "newmodule_update_instance" recebe os dados vindos do mod_form.php como um objeto sempre que você alterar a atividade e submeter o formulário. O id da instância que você está editando é passado como um atributo do objeto e você pode utilizá-lo para editar quaisquer valores na base de dados para aquela instância.</p>
+            <p>A função "newmodule_delete_instance" recebe o id da instância do seu módulo de forma que você pode utilizá-lo para remover os registros relacionados do banco de dados.</p>
+
+            <p>Além destas funções, caso se deseje trabalhar com notas, é preciso implementar as funções que atualizam e excluem um item de nota e a função que informa as notas para o livro de notas:</p>
+            <pre><code data-language="php">
+function newmodule_grade_item_update(stdClass $newmodule, $reset=false) {
+    global $CFG;
+    require_once($CFG->libdir.'/gradelib.php');
+
+    $item = array();
+    $item['itemname'] = clean_param($newmodule->name, PARAM_NOTAGS);
+    $item['gradetype'] = GRADE_TYPE_VALUE;
+
+    if ($newmodule->grade > 0) {
+        $item['gradetype'] = GRADE_TYPE_VALUE;
+        $item['grademax']  = $newmodule->grade;
+        $item['grademin']  = 0;
+    } else if ($newmodule->grade < 0) {
+        $item['gradetype'] = GRADE_TYPE_SCALE;
+        $item['scaleid']   = -$newmodule->grade;
+    } else {
+        $item['gradetype'] = GRADE_TYPE_NONE;
+    }
+
+    if ($reset) {
+        $item['reset'] = true;
+    }
+
+    grade_update('mod/newmodule', $newmodule->course, 'mod', 'newmodule',
+            $newmodule->id, 0, null, $item);
+}
+
+function newmodule_grade_item_delete($newmodule) {
+    global $CFG;
+    require_once($CFG->libdir.'/gradelib.php');
+
+    return grade_update('mod/newmodule', $newmodule->course, 'mod', 'newmodule',
+            $newmodule->id, 0, null, array('deleted' => 1));
+}
+
+function newmodule_update_grades(stdClass $newmodule, $userid = 0) {
+    global $CFG, $DB;
+    require_once($CFG->libdir.'/gradelib.php');
+
+    // Populate array of grade objects indexed by userid.
+    $grades = array();
+
+    grade_update('mod/newmodule', $newmodule->course, 'mod', 'newmodule', $newmodule->id, 0, $grades);
+}
+</code></pre>
 
             <h4>mod_form.php</h4>
             <p>Este arquivo é utilizado para criar e editar as instâncias do seu módulo. Ele contém os elementos presentes no formulário que são necessários para criar/editar uma instância do seu módulo. A classe neste arquivo deve se chamar "mod_mymodule_mod_form".</p>
             <p>Abaixo, um exemplo do módulo certificado:</p>
 
-            <pre><code data-language="php">if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
-}
+            <pre><code data-language="php">defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->dirroot.'/mod/certificate/lib.php');
@@ -351,19 +437,15 @@ class mod_certificate_mod_form extends moodleform_mod {
 }</code></pre>
             <p>Assim como em outros formulários do Moodle, é possível adicionar validação. Para mais informações sobre como criar formulários, acesse a <a href="https://docs.moodle.org/dev/Form_API">documentação oficial sobre a "Form API"</a>.</p>
 
-            <h4>index.php</h4>
-            <p>Esta página é utilizada pelo Moodle para listar todas as instâncias do seu módulo em um curso específico (o id deste curso é informado via GET).</p>
-            <p>O início da página deve conter ao menos uma chamada "required_param" para obter o ID do curso e um teste para certificar-se que o curso existe na base de dados.</p>
-
             <h4>view.php</h4>
             <p>Quando o Moodle renderiza o curso e gera os links para as atividades, ele faz isto referenciando o arquivo view.php dos módulos e passando como "id" o "course module id".</p>
             <p>Abaixo, um exemplo do início desta página para o módulo certificado. Após estes testes iniciais, você está livre para construir a página do jeito que desejar.</p>
 
             <pre><code data-language="php">require_once('../../config.php');
 require_once('lib.php');
- 
+
 $id = required_param('id', PARAM_INT);    // Course Module ID
- 
+
 if (!$cm = get_coursemodule_from_id('certificate', $id)) {
     print_error('Course Module ID was incorrect');
 }
@@ -372,7 +454,105 @@ if (!$course = $DB->get_record('course', array('id'=> $cm->course))) {
 }
 if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance))) {
     print_error('course module is incorrect');
-}</code></pre>
+}
+// Print the page header.
+
+$PAGE->set_url('/mod/newmodule/view.php', array('id' => $cm->id));
+$PAGE->set_title(format_string($newmodule->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+// Output starts here.
+echo $OUTPUT->header();
+
+// Conditions to show the intro can change to look for own settings or whatever.
+if ($newmodule->intro) {
+    echo $OUTPUT->box(format_module_intro('newmodule', $newmodule, $cm->id), 'generalbox mod_introbox', 'newmoduleintro');
+}
+
+// Replace the following lines with you own code.
+echo $OUTPUT->heading('Yay! It works!');
+
+// Finish the page.
+echo $OUTPUT->footer();
+</code></pre>
+
+
+            <h4>index.php</h4>
+            <p>Esta página é utilizada pelo Moodle para listar todas as instâncias do seu módulo em um curso específico (o id deste curso é informado via GET).</p>
+            <p>O início da página deve conter ao menos uma chamada "required_param" para obter o ID do curso e um teste para certificar-se que o curso existe na base de dados.</p>
+
+            <pre><code data-language="php">
+require_once('../../config.php');
+require_once(dirname(__FILE__).'/lib.php');
+
+$id = required_param('id', PARAM_INT); // Course.
+
+$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
+
+require_course_login($course);
+
+$params = array(
+    'context' => context_course::instance($course->id)
+);
+$event = \mod_newmodule\event\course_module_instance_list_viewed::create($params);
+$event->add_record_snapshot('course', $course);
+$event->trigger();
+
+$strname = get_string('modulenameplural', 'mod_newmodule');
+$PAGE->set_url('/mod/newmodule/index.php', array('id' => $id));
+$PAGE->navbar->add($strname);
+$PAGE->set_title("$course->shortname: $strname");
+$PAGE->set_heading($course->fullname);
+$PAGE->set_pagelayout('incourse');
+
+echo $OUTPUT->header();
+echo $OUTPUT->heading($strname);
+
+if (! $newmodules = get_all_instances_in_course('newmodule', $course)) {
+    notice(get_string('nonewmodules', 'newmodule'), new moodle_url('/course/view.php', array('id' => $course->id)));
+}
+
+$usesections = course_format_uses_sections($course->format);
+
+$table = new html_table();
+$table->attributes['class'] = 'generaltable mod_index';
+
+if ($usesections) {
+    $strsectionname = get_string('sectionname', 'format_'.$course->format);
+    $table->head  = array ($strsectionname, $strname);
+    $table->align = array ('center', 'left');
+} else {
+    $table->head  = array ($strname);
+    $table->align = array ('left');
+}
+
+$modinfo = get_fast_modinfo($course);
+$currentsection = '';
+foreach ($modinfo->instances['newmodule'] as $cm) {
+    $row = array();
+    if ($usesections) {
+        if ($cm->sectionnum !== $currentsection) {
+            if ($cm->sectionnum) {
+                $row[] = get_section_name($course, $cm->sectionnum);
+            }
+            if ($currentsection !== '') {
+                $table->data[] = 'hr';
+            }
+            $currentsection = $cm->sectionnum;
+        }
+    }
+
+    $class = $cm->visible ? null : array('class' => 'dimmed');
+
+    $row[] = html_writer::link(new moodle_url('view.php', array('id' => $cm->id)),
+                $cm->get_formatted_name(), $class);
+    $table->data[] = $row;
+}
+
+echo html_writer::table($table);
+
+echo $OUTPUT->footer();
+</code></pre>
 
             <h4>version.php</h4>
             <p>Este arquivo guarda as informações de versão do seu módulo assim como a versão mínima do Moodle e dependências de outros módulos, caso exista.</p>
@@ -554,7 +734,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 
             <pre><code data-language="php">//Obter todos os registros onde foo = bar
 $result = $DB->get_records($table,array('foo'=>'bar'));
-             
+
 // Obter todos resultados onde foo = bar && jon = doe
 $result = $DB->get_records($table,array('foo' => 'bar' , 'jon' => 'doe'));
 
@@ -567,7 +747,7 @@ $result = $DB->get_records($table,array('foo'=>'bar'),null,'foo,bar,jon,doe');</
 
 // Passando parâmetros para consultas com "Question mark placeholders"
 $DB->get_record_sql('SELECT * FROM {user} WHERE firstname = ? AND lastname = ?', array('Martin', 'Dougiamas'));
-                
+
 /// Passando parâmetros para consultas com "Named placeholders":
 $DB->get_record_sql('SELECT *
                        FROM {user}
@@ -577,7 +757,7 @@ $DB->get_record_sql('SELECT *
 
             <p>Para excluir registros da base também temos duas possibilidades:</p>
             <pre><code data-language="php">// Excluir registros de uma tabela onde todas as condições são satisfeitas
-$DB->delete_records($table, array $conditions=null) 
+$DB->delete_records($table, array $conditions=null)
 
 // Excluir um ou mais registros de uma tabela que satisfaçam um cláusula WHERE
  $DB->delete_records_select($table, $select, array $params=null)</code></pre>
@@ -609,7 +789,7 @@ $DB->update_record('user', $user);</code></pre>
 
             <pre><code data-language="php">// Para obter uma string traduzida, basta informar o identificador da string e o módulo onde buscá-la
 get_string('identificador_da_string', 'module_pluginlangfilename');
-   
+
 // Também é possível informar valores que serão utilizados na string traduzida
 get_string('identificador_da_string', 'module_pluginlangfilename', 10);
 
@@ -691,22 +871,100 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Output_API">Documentação oficial sobre Output API</a></p>
 
-            <h3>Logging</h3>
+            <h3>Logs e Eventos</h3>
 
-            <p>A API de logs do Moodle é bastante simples e consiste de algumas funções para gerar e consultar logs. A função mais utilizada é a get_log().</p>
+            <p>A partir da versão 2.7, o Moodle conta com uma API de registro e observação de eventos.</p>
+            <p>Aqui vamos ver apenas a parte do registro de eventos.</p>
+            <p>Para criar um evento, você precisa seguir alguns passos.</p>
+            <p>Primeiro, você deve definir o nome do evento no arquivo de idiomas:</p>
 
-            <pre><code data-language="php">add_to_log($courseid, $module, $action, $url='', $info='', $cm=0, $user=0)</code></pre>
+            <pre><code data-language="php">$string['eventEVENTNAME] = 'Something has happened';</code></pre>
+            <p>É importante notar que a chave da string deve começar com "event" e terminar com um dos <a href="https://docs.moodle.org/dev/Event_2#Verb_list">verbos disponíveis</a>.</p>
 
-            <p>Para buscar os logs da base de dados, existem três funções:</p>
+            <p>O segundo passo é criar a classe do evento. Esta classe deve ser declarada dentro do arquivo "classes/event/EVENTNAME.php".</p>
+            <p>Abaixo, um exemplo de uma classe de evento.</p>
 
-            <pre><code data-language="php">get_logs($select, array $params=null, $order='l.time DESC', $limitfrom='', $limitnum='', &$totalcount)
-get_logs_usercourse($userid, $courseid, $coursestart)
-get_logs_userday($userid, $courseid, $daystart)</code></pre>
+            <pre><code data-language="php">namespace FULLPLUGINNAME\event;
+defined('MOODLE_INTERNAL') || die();
+
+class EVENTNAME extends \core\event\base {
+    protected function init() {
+        $this->data['crud'] = 'c'; // c(reate), r(ead), u(pdate), d(elete)
+        $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
+        $this->data['objecttable'] = '...';
+    }
+
+    public static function get_name() {
+        return get_string('eventEVENTNAME', 'FULLPLUGINNAME');
+    }
+
+    public function get_description() {
+        return "The user with id {$this->userid} created ... ... ... with id {$this->objectid}.";
+    }
+
+    public function get_url() {
+        return new \moodle_url('....', array('parameter' => 'value', ...));
+    }
+}
+</code></pre>
+
+            <p>Para "disparar" o evento, você deve primeiro instanciá-lo e então invocar o método "trigger", como abaixo:</p>
+            <pre><code data-language="php">
+$event = \FULLPLUGINNAME\event\EVENTNAME::create(array(
+    'objectid' => $objid,
+        'context' => context_module::instance($cmid)
+        ));
+$event->trigger();
+</code></pre>
+
+            <p>Chamadas de eventos para sinalizar a visualização de módulos são comuns, então o Moodle já escolheu um nome para este evento ("course_module_viewed") e já definiu a string no arquivo de idiomas do "core".</p>
+            <p>Então você só precisa criar a classe no arquivo "classes/event/course_module_viewed.php":</p>
+
+            <pre><code data-language="php">
+namespace FULLPLUGINNAME\event;
+defined('MOODLE_INTERNAL') || die();
+class course_module_viewed extends \core\event\course_module_viewed {
+    protected function init() {
+        $this->data['objecttable'] = 'PLUGINNAME';
+        parent::init();
+    }
+    // You might need to override get_url() and get_legacy_log_data() if view mode needs to be stored as well.
+}
+</code></pre>
+
+            <p>E disparar o evento:</p>
+            <pre><code data-language="php">
+$event = \mod_newmodule\event\course_module_viewed::create(array(
+    'objectid' => $PAGE->cm->instance,
+        'context' => $PAGE->context,
+        ));
+$event->add_record_snapshot('course', $PAGE->course);
+$event->add_record_snapshot($PAGE->cm->modname, $newmodule);
+$event->trigger();
+</code></pre>
+
+            <p>Semelhante ao evento de visualização, que geralmente é disparado no arquivo view.php, existe também o evento de visualização da lista daqueles plugins no curso, que é geralmente disparado no index.php</p>
+            <p>Então o Moodle também já definiu o evento "course_module_instance_list_viewed" e sua string, você só precisa declarar a classe, como fez para o evento de visualização.</p>
+            <p>Após criar seus eventos, é necessário incrementar a versão do plugin no arquivo "version.php".</p>
+
+<p>Para consultar os eventos registrados, trabalharemos com o "logmanager" e os leitores de eventos, conforme exemplo abaixo:</p>
+            <pre><code data-language="php">$logmanager = get_log_manager();
+if (!$readers = $logmanager->get_readers('core\log\sql_reader')) {
+    // Should be using 2.8, use old class.
+    $readers = $logmanager->get_readers('core\log\sql_select_reader');
+}
+$reader = array_pop($readers);
+$context = $info->get_context();
+$viewscount = $reader->get_events_select_count('contextid = :context AND userid = :userid AND crud = :crud',
+                                               array('context' => $context->id,
+                                                     'userid' => $userid,
+                                                     'crud' => 'r'));
+</code></pre>
 
             <div class="alert alert-info">
                 <ul>
-                <li><a href="https://docs.moodle.org/dev/Logging_API">Documentação oficial sobre a API de logs</a>.</li>
-                <li><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a>.</li>
+                    <li><a href="https://docs.moodle.org/dev/Event_2">Documentação oficial sobre a API de Eventos</a></li>
+                    <li><a href="https://docs.moodle.org/dev/Migrating_logging_calls_in_plugins">Definindo Eventos</a></li>
                 </ul>
             </div>
 
@@ -738,7 +996,7 @@ get_logs_userday($userid, $courseid, $daystart)</code></pre>
         )
     );
 }</code></pre>
-            <p>Outra para definir o retorno:</p> 
+            <p>Outra para definir o retorno:</p>
             <pre><code data-language="php">public static function hello_world_returns();
     return new external_value(PARAM_TEXT, 'The welcome message + user first name');
 }</code></pre>
@@ -800,6 +1058,16 @@ $services = array(
             <li><a href="https://github.com/moodlehq/moodle-local_wstemplate">Template de webservice no Github</a></li>
             </ul>
             </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <h2>Para ir mais além</h2>
+            <div class="alert alert-info">
+                <ul>
+                    <li><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></li>
+                    <li><a href="http://www.aosabook.org/en/moodle.html">Arquitetura da aplicações de código livre: Moodle</a></li>
+                </ul>
             </div>
         </div>
 
