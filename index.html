@@ -201,7 +201,7 @@
 
             <p>Apesar de todas as possibilidades de um bloco, a interface do Moodle torna tranquila a criação de um novo bloco. No exemplo mais simples, precisaremos de apenas quatro arquivos:</p>
 
-            <h4>block_simplehtml.php</h4>
+            <h4>block_newblock.php</h4>
             <p>Este arquivo guarda a definição da classe do bloco e é responsável pelo seu gerenciamento e também pela geração do conteúdo a ser apresentado para o usuário</p>
 
             <h4>db/access.php</h4>
@@ -245,11 +245,11 @@ $capabilities = array(
             <p>Este arquivo guarda a versão do plugin, a versão mínima do Moodle exigida, quais plugins são necessários para que este bloco funcione, informações sobre período de execução via cron (caso existir) e outras configurações.</p>
 
             <div class="alert alert-block alert-info">
-            <ul>
-            <li><a href="https://docs.moodle.org/dev/Blocks">Documentação oficial de blocos para desenvolvedores</a></li>
-            <li><a href="https://github.com/danielneis/moodle-block_newblock">Modelo de bloco no Github</a></li>
-            <li><a href="https://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
-            </ul>
+                <ul>
+                    <li><a href="https://docs.moodle.org/dev/Blocks">Documentação oficial de blocos para desenvolvedores</a></li>
+                    <li><a href="https://github.com/danielneis/moodle-block_newblock">Modelo de bloco no Github</a></li>
+                    <li><a href="https://docs.moodle.org/dev/NEWMODULE_Adding_capabilities">Documentação oficial sobre definição de capabilities</a></li>
+                </ul>
             </div>
             </div>
 
@@ -310,6 +310,34 @@ $capabilities = array(
             <h4>db/install.xml</h4>
             <p>Este arquivo é utilizado na instalação de seu módulo. Nele estão definidas as tabelas (e campos) que serão criadas pelo módulo. Se o seu módulo não precisa de novas tabelas, este arquivo não é necessário. Para criar este arquivo, veja a documentação sobre o <a href="https://docs.moodle.org/dev/XMLDB_editor">XMLDB Editor</a>.</p>
             <p>É recomendável que o módulo tenha pelo menos uma tabela com o mesmo nome, com os campos "id", "name" e "course".</p>
+            <pre><code data-language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;XMLDB PATH="mod/newmodule/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/newmodule"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+&gt;
+  &lt;TABLES&gt;
+    &lt;TABLE NAME="newmodule" COMMENT="Default comment for newmodule, please edit me"&gt;
+      &lt;FIELDS&gt;
+        &lt;FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/&gt;
+        &lt;FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course newmodule activity belongs to"/&gt;
+        &lt;FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/&gt;
+        &lt;FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the newmodule activity"/&gt;
+        &lt;FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/&gt;
+        &lt;FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/&gt;
+        &lt;FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/&gt;
+        &lt;FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/&gt;
+      &lt;/FIELDS&gt;
+      &lt;KEYS&gt;
+        &lt;KEY NAME="primary" TYPE="primary" FIELDS="id"/&gt;
+      &lt;/KEYS&gt;
+      &lt;INDEXES&gt;
+        &lt;INDEX NAME="course" UNIQUE="false" FIELDS="course"/&gt;
+      &lt;/INDEXES&gt;
+    &lt;/TABLE&gt;
+  &lt;/TABLES&gt;
+&lt;/XMLDB&gt;
+</code></pre>
 
             <h4>db/upgrade.php</h4>
             <p>Este arquivo trata da atualização do módulo. Após criar o módulo e utilizá-lo em seu site, é possível que você queira adicionar alguma nova funcionalidade e que isso demande a criação/alteração de tabelas e campos.</p>
