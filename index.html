@@ -44,6 +44,7 @@
                 <li><a href="#grades">Notas</a></li>
                 <li><a href="#apis">APIs</a></li>
                 <li><a href="#webservices">Webservices</a></li>
+                <li><a href="#learnmore">Para aprender mais</a></li>
                 </ul>
             </div>
 
@@ -876,14 +877,14 @@ $DB->get_record_sql('SELECT *
                        FROM {user}
                       WHERE firstname = :firstname
                         AND lastname = :lastname',
-                    array('firstname'=>'Martin', 'lastname'=>'Dougiamas'));</code></pre>
+                    array('firstname' => 'Martin', 'lastname' => 'Dougiamas'));</code></pre>
 
             <p>Para excluir registros da base também temos duas possibilidades:</p>
             <pre><code data-language="php">// Excluir registros de uma tabela onde todas as condições são satisfeitas
-$DB->delete_records($table, array $conditions=null)
+$DB->delete_records($table, array $conditions = null)
 
 // Excluir um ou mais registros de uma tabela que satisfaçam um cláusula WHERE
- $DB->delete_records_select($table, $select, array $params=null)</code></pre>
+ $DB->delete_records_select($table, $select, array $params = null)</code></pre>
 
             <p>Para incluir registros, basta montar um objeto com os campos desejados e utilizar o "insert_record":</p>
             <pre><code data-language="php">$record = new stdClass();
@@ -898,9 +899,11 @@ $DB->update_record('user', $user);</code></pre>
 
             <p>Para controle de transações existem duas funções (uma para iniciar e outra para fazer o commit). Qualquer exceção lançada entre estas duas funções causa um rollback na base.</p>
 
-            <pre><code data-language="php">
-     $transaction = $DB->start_delegated_transaction(); //If an exception is thrown in the below code, all DB queries in this code will be rollback.
-     $transaction->allow_commit();</code></pre>
+            <pre><code data-language="php">$transaction = $DB->start_delegated_transaction();
+// Se uma exceção for lançada no código a seguir, será feito o "rollback" de todas as consultas do banco.
+// ... aqui vai seu código, com várias consultas ao banco ...
+$transaction->allow_commit();
+</code></pre>
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Data_manipulation_API">Documentação oficial sobre a API de acesso à base de dados</a>.</p>
 
@@ -1182,25 +1185,22 @@ $services = array(
             </ul>
             </div>
             </div>
-        </div>
 
         <div class="row-fluid">
-            <h2>Para ir mais além</h2>
-            <div class="alert alert-info">
+            <h2><a id="learnmore">Para aprender mais</a></h2>
                 <ul>
                     <li><a href="https://docs.moodle.org/dev/Core_APIs">Lista completa de todas as APIs "núcleo"</a></li>
                     <li><a href="http://www.aosabook.org/en/moodle.html">Arquitetura da aplicações de código livre: Moodle</a></li>
                 </ul>
-            </div>
         </div>
+        </div>
+
 
         <div id="license">
         <center>
-            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-            <p>Autor:</p>
-            <ul>
-                <li>Daniel Neis &lt;danielneis@gmail.com&gt;</li>
-            </ul>
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/creativecommons.png" /></a>
+            <br /><span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">Moodle Para Desenvolvedores</span> é licenciado sob <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            <p>Autor: Daniel Neis Araujo &lt;danielneis@gmail.com&gt;</p>
         </center>
         </div>
 
