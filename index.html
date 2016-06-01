@@ -652,20 +652,26 @@ echo $OUTPUT->footer();
             <div class="row-fluid">
             <h2><a id="resources">Recursos</a></h2>
 
+            <p>Recursos são materiais de referência, como vídeos, PDFs, URLs, etc.</p>
+            <p>Como a estrutura de um recurso é igual a de um módulo de atividades, com a diferença que geralmente não usam notas, não entraremos em detalhes sobre como construir um recurso.</p>
+            <p>Todos os passos para construir um recurso são iguais ao da atividade.</p>
+            <p>Os recursos também ficam no diretório "mod", cada um em seu respectivo diretório.</p>
+
+            <p>Abaixo, a lista de recursos padrão do Moodle:</p>
             <ul>
-            <li>Book - Multi-page resources with a book-like format</li>
-            <li>File - A picture, a pdf document, a spreadsheet, a sound file, a video file</li>
-            <li>Folder - For helping organize files and one folder may contain other folders</li>
-            <li>IMS content package - Add static material from other sources in the standard IMS content package format</li>
-            <li>Label - Can be a few displayed words or an image used to separate resources and activities in a topic section, or can be a lengthy description or instructions</li>
-            <li>Page - The student sees a single, scrollable screen that a teacher creates with the robust HTML editor</li>
-            <li>URL - You can send the student to any place they can reach on their web browser, for example Wikipedia </li>
+                <li>Livro (book)- Com este recurso é possível construir livros com capítulos e subcapítulos que serão acessíveis pelo Moodle.</li>
+                <li>Arquio (file) - A picture, a pdf document, a spreadsheet, a sound file, a video file</li>
+                <li>Pasta (folder) - For helping organize files and one folder may contain other folders</li>
+                <li>Pacote IMS (imscp) - Add static material from other sources in the standard IMS content package format</li>
+                <li>Rótulo (label) - Can be a few displayed words or an image used to separate resources and activities in a topic section, or can be a lengthy description or instructions</li>
+                <li>Página (page) - The student sees a single, scrollable screen that a teacher creates with the robust HTML editor</li>
+                <li>URL - You can send the student to any place they can reach on their web browser, for example Wikipedia </li>
             </ul>
-            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Resources">Documentação oficial</a></p>
+            <p class="alert alert-info"><a href="https://docs.moodle.org/en/Resources">Documentação oficial sobre recursos</a></p>
             </div>
 
             <div class="row-fluid">
-            <h2><a id="plugins">Plugins</a></h2>
+            <h2><a id="plugins">Outros tipos de Plugins</a></h2>
 
             <p>Você pode conseguir a lista de tipos de plugins da sua versão do Moodle com o seguinte script:</p>
             <pre><code data-language="php">define('CLI_SCRIPT', true);
