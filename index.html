@@ -40,7 +40,16 @@
                 <li><a href="#grades">Notas</a></li>
                 <li><a href="#themes">Temas</a></li>
                 <li><a href="#webservices">Webservices</a></li>
-                <li><a href="#apis">APIs</a></li>
+                <li><a href="#apis">APIs</a>
+                    <ul>
+                        <li><a href="#api_database">Banco de dados</li>
+                        <li><a href="#api_i18n">Internacionalização e localização</li>
+                        <li><a href="#api_page">Page</li>
+                        <li><a href="#api_navigation">Navegação</li>
+                        <li><a href="#api_output">Output</li>
+                        <li><a href="#api_events">Eventos</li>
+                    </ul>
+                </li>
                 <li><a href="#learnmore">Para aprender mais</a></li>
             </ul>
 
@@ -993,7 +1002,7 @@ $services = array(
 
             <h2><a id="apis">APIs</a></h2>
 
-            <h3>Banco de dados</h3>
+            <h3><a id="api_database">Banco de dados</a></h3>
 
             <p>A manipulação da base de dados no Moodle é feita através de um objeto global $DB. Abaixo vemos alguns exemplos de uso desse objeto.</p>
 
@@ -1059,7 +1068,7 @@ $transaction->allow_commit();
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Data_manipulation_API">Documentação oficial sobre a API de acesso à base de dados</a>.</p>
 
-            <h3>Internacionalização e localização</h3>
+            <h3><a id="api_i18n">Internacionalização e localização</a></h3>
 
             <p>A "String API" gerencia a internacionalização, ou seja, ela escolhe o texto no idioma correto para apresentar ao usuário. O Moodle busca o texto (strings) em uma série de lugares (com ordem bem definida) de forma que as strings podem ser distribuídas com os plugins e evita o processo de copiar o diretório de idiomas quando um plugin é instalado.</p>
 
@@ -1089,7 +1098,7 @@ $string['identificador_da_string'] = 'Minha string com valor {$a->number} e tamb
                 </ul>
             </div>
 
-            <h3>Page</h3>
+            <h3><a id="api_page">Page</a></h3>
             <p>A Page API é parte integrante de todas as páginas do Moodle. Ela permite que o desenvolvedor defina coisas como título da página, o cabeçalho inicial, em que ponto da navegação o usuário está e qual layout a página deve utilizar.</p>
             <p>Para criar uma página "com a cara do Moodle", é preciso, pelo menos, definir a URL e o Contexto atuais.</p>
 
@@ -1127,7 +1136,7 @@ $PAGE->add_body_classes($arrayofclasses);
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Page_API">Documentação oficial sobre a Page API</a></p>
 
-            <h3>Navigation</h3>
+            <h3><a id="api_navigation">Navegação</a></h3>
             <p>A "Navigation API" permite manipular o sistema de navegação utilizado no Moodle. A navegação está disponível através do objeto $PAGE e usa a informação deste para gerar a estrutura de navegação do site. Os blocos de navegação e configurações são interpretações da estrutura que o Moodle cria. A estrutura de navegação está disponível em três variáveis:</p>
             <dl>
                 <dt>$PAGE->navigation</dt>
@@ -1152,7 +1161,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
                 </ul>
             </div>
 
-            <h3>Output</h3>
+            <h3><a id="api_output">Output</a></h3>
 
             <p>O Moodle oferece a Output API para facilitar a geração de elementos HTML complexos, além do cabeçalho e rodapé (que são obrigatórios em todas as páginas).</p>
             <p>Após definir os parâmetros da variável $PAGE, para imprimir todo o cabeçalho do Moodle basta chamar uma função:</p>
@@ -1163,7 +1172,7 @@ $PAGE->navbar->add(get_string('name of thing'), new moodle_url('/a/link/if/you/w
 
             <p class="alert alert-info"><a href="https://docs.moodle.org/dev/Output_API">Documentação oficial sobre Output API</a></p>
 
-            <h3>Logs e Eventos</h3>
+            <h3><a id="api_events">Eventos</a></h3>
 
             <p>A partir da versão 2.7, o Moodle conta com uma API de registro e observação de eventos.</p>
             <p>Aqui vamos ver apenas a parte do registro de eventos.</p>
