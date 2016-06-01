@@ -2,6 +2,10 @@ img {
     margin-bottom: 1em;
 }
 
+h3 a,
+h3 a:hover,
+h3 a:active,
+h3 a:visited,
 h2 a,
 h2 a:hover,
 h2 a:active,
