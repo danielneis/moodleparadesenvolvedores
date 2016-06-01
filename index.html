@@ -203,6 +203,40 @@
 
             <h4>block_newblock.php</h4>
             <p>Este arquivo guarda a definição da classe do bloco e é responsável pelo seu gerenciamento e também pela geração do conteúdo a ser apresentado para o usuário</p>
+            <p>Aqui definimos a classe principal do bloco, que será responsável por gerar o conteúdo apresentado pelo bloco e também fazer alguns controles como por exemplo se existem configurações globais e se são permitidas múltiplas instâncias do bloco no mesmo curso.</p>
+            <p>Abaixo, um exemplo minimalista de uma classe de bloco:</p>
+            <pre><code data-language="php">
+class block_newblock extends block_base {
+
+    function init() {
+        $this->title = get_string('pluginname', 'block_newblock');
+
+    }
+
+    function get_content() {
+        global $USER, $DB;
+
+        if ($this->content !== null) {
+            return $this->content;
+        }
+
+        $this->content = new stdClass();
+        $this->content->footer = 'block footer';
+        $this->content->footer = 'Here is the block contents';
+
+
+        return $this->content;
+    }
+
+    public function instance_allow_multiple() {
+          return true;
+    }
+
+    function has_config() {
+        return true;
+    }
+}
+</code></pre>
 
             <h4>db/access.php</h4>
             <p>Este arquivo define as capabilities criadas pelo bloco. Pelo menos duas capabilities são necessárias: "myaddinstance" e "addinstance".</p>
@@ -239,6 +273,7 @@ $capabilities = array(
             <p>Neste diretório são guardados os idiomas. Você deve criar dentro dele o diretório "en" e lá o arquivo "block_newblock.php" com as strings em inglês.</p>
             <p>Existe 1 string que deve ser declarada obrigatoriamente: "pluginname".</p>
             <p>Se você for publicar este bloco na Moodle Plugin Database, você poderá traduzí-lo com o AMOS em <a href="https://lang.moodle.org">lang.moodle.org</a>, caso contrário crie o arquivo lang/pt_br/block_simplehtml.php para traduzí-lo para o português.</p>
+
             <pre><code data-language="php">$string['pluginname'] = 'Newblock';</code></pre>
 
             <h4>version.php</h4>
@@ -284,7 +319,7 @@ $capabilities = array(
 
             <img src="img/Activities_file_structure_example.jpg" class="thumbnail"/>
 
-            <h4>Diretório de Backup</h4>
+            <h4>Diretório backup</h4>
 
             <p>No diretório de backup ficam os arquivos responsáveis por salvar os dados do seu módulo durante o backup e restaurá-los durante a restauração. O Moodle oferece uma <a href="https://docs.moodle.org/dev/Backup_2.0_for_developers">API de Backup</a> e uma <a href="https://docs.moodle.org/dev/Restore_2.0_for_developers">API de Restore</a>. Neste curso, não vamos estudar estas APIs pois a implementação de backup/restore de um plugin não é obrigatório e muitas vezes é bastante complexa.</p>
 
@@ -310,6 +345,7 @@ $capabilities = array(
             <h4>db/install.xml</h4>
             <p>Este arquivo é utilizado na instalação de seu módulo. Nele estão definidas as tabelas (e campos) que serão criadas pelo módulo. Se o seu módulo não precisa de novas tabelas, este arquivo não é necessário. Para criar este arquivo, veja a documentação sobre o <a href="https://docs.moodle.org/dev/XMLDB_editor">XMLDB Editor</a>.</p>
             <p>É recomendável que o módulo tenha pelo menos uma tabela com o mesmo nome, com os campos "id", "name" e "course".</p>
+
             <pre><code data-language="xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;XMLDB PATH="mod/newmodule/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/newmodule"
@@ -366,6 +402,7 @@ $capabilities = array(
     }
 }
 </code></pre>
+
             <p>Então, para atualizar seu módulo é necessário:</p>
             <ul>
             <li>Alterar o "db/install.xml" para que novas instalações tenham a nova estrutura</li>
@@ -381,7 +418,7 @@ $string['modulename'] = 'newmodule';
 $string['modulenameplural'] = 'newmodules';
 </code></pre>
 
-            <h4>Pix folder</h4>
+            <h4>Diretório pix</h4>
             <p>Este diretório guarda o ícone que você quer que o Moodle mostre ao lado do nome do seu módulo. O nome do arquivo deve ser "icon.gif" e é mostrado com uma resolução de 16x16. Você pode também guardar outras imagens utilizadas pelo seu módulo neste diretório.</p>
             <p>A versão 2.4 do Moodle introduziu ícones em SVG para os módulos padrão. Veja a <a href="https://docs.moodle.org/dev/Moodle_icons_2.4">documentação oficial</a> para detalhes sobre como utilizá-los.</p>
 
@@ -557,7 +594,6 @@ echo $OUTPUT->heading('Yay! It works!');
 echo $OUTPUT->footer();
 </code></pre>
 
-
             <h4>index.php</h4>
             <p>Esta página é utilizada pelo Moodle para listar todas as instâncias do seu módulo em um curso específico (o id deste curso é informado via GET).</p>
             <p>O início da página deve conter ao menos uma chamada "required_param" para obter o ID do curso e um teste para certificar-se que o curso existe na base de dados.</p>
@@ -660,12 +696,12 @@ echo $OUTPUT->footer();
             <p>Abaixo, a lista de recursos padrão do Moodle:</p>
             <ul>
                 <li>Livro (book)- Com este recurso é possível construir livros com capítulos e subcapítulos que serão acessíveis pelo Moodle.</li>
-                <li>Arquio (file) - A picture, a pdf document, a spreadsheet, a sound file, a video file</li>
-                <li>Pasta (folder) - For helping organize files and one folder may contain other folders</li>
-                <li>Pacote IMS (imscp) - Add static material from other sources in the standard IMS content package format</li>
-                <li>Rótulo (label) - Can be a few displayed words or an image used to separate resources and activities in a topic section, or can be a lengthy description or instructions</li>
-                <li>Página (page) - The student sees a single, scrollable screen that a teacher creates with the robust HTML editor</li>
-                <li>URL - You can send the student to any place they can reach on their web browser, for example Wikipedia </li>
+                <li>Arquio (resource) - Quaisquer arquivos para disponibilizar para os alunos como imagem, um documento pdf, uma planilha, um arquivo de som ou vídeo.</li>
+                <li>Pasta (folder) - Uma pasta com vários arquivos e que também permite sub-pastas.</li>
+                <li>Pacote IMS (imscp) - Incluir materiais estáticos de outras fontes que estejam no padrão de empacotamento IMS</li>
+                <li>Rótulo (label) - Com este recurso você pode incluir conteúdo HTML nas seções do curso.</li>
+                <li>Página (page) - Permite criar uma única página HTML com o editor visual do Moodle</li>
+                <li>URL - Cria um link para qualquer página web para que os alunos visitem, por exemplo a Wikipédia </li>
             </ul>
             <p class="alert alert-info"><a href="https://docs.moodle.org/en/Resources">Documentação oficial sobre recursos</a></p>
             </div>
