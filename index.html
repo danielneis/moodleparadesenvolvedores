@@ -569,6 +569,9 @@ if (!$course = $DB->get_record('course', array('id'=> $cm->course))) {
 if (!$certificate = $DB->get_record('certificate', array('id'=> $cm->instance))) {
     print_error('course module is incorrect');
 }
+
+require_login($course, true, $cm);
+
 // Print the page header.
 
 $PAGE->set_url('/mod/newmodule/view.php', array('id' => $cm->id));
