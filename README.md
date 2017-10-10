@@ -1,7 +1,6 @@
 # Moodle Para Desenvolvedores
 
-Esta é uma documentação, em português do brasil,
-construída colaborativamente, sobre o Moodle (https://moodle.org).
+Esta é uma documentação, em português do brasil, sobre o Moodle (https://moodle.org).
 
 Fique a vontade para clonar o repositório,
 fazer as alterações que considerar interessante
