@@ -918,10 +918,14 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             <p>Vamos ver o que é preciso para disponibilizar uma nova função via Webservice. Para tal, vamos criar um plugin "local".</p>
             <p>Os "plugins locais" são uma classe de plugins do Moodle que por padrão não está acessível via interface (mas é possível incluí-los nos blocos de navegação), então é a classe mais adequada para criação de webservices. Outros tipos de plugins também podem conter webservices, mas aqui vamos focar nos plugins locais.</p>
             <p>Cada plugin local é um subdiretório do diretório "local", que fica na raiz do Moodle. Assim como outros módulos, os plugins locais possuem os arquivos "version.php" e "db/access.php" e o diretório "lang".</p>
-            <p>A implementação do webservice é feita no arquivo <strong>externallib.php</strong> (na raiz do plugin) declarando uma classe "local_meumodulo_external" que estende a classe "external_api".</p>
-            <p>Para cada função do webservice (vamos tomar por exemplo "hello_world" são necessárias três funções nesta classe:</p>
+            <p>A implementação do webservice é feita no arquivo <strong>externallib.php</strong> (na raiz do plugin) declarando uma classe <strong>"tipodoplugin_meumodulo_external"</strong> que herda da classe <strong>"external_api"</strong>.</p>
+            <pre><code data-language="php">class local_wstemplate_external extends external_api {
+                ...
+}
+</code></pre>
+            <p>Dentro dessa classe, para cada função do webservice (por exemplo "hello_world") são necessárias três funções:</p>
             <p>Uma para definir os parâmetros:</p>
-            <pre><code data-language="php">public static function hello_world_parameters();
+            <pre><code data-language="php">public static function hello_world_parameters() {
     return new external_function_parameters(
         array(
             'a' => new external_multiple_structure(
@@ -938,11 +942,12 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
 }</code></pre>
 
             <p>Outra para definir o retorno:</p>
-            <pre><code data-language="php">public static function hello_world_returns();
+            <pre><code data-language="php">public static function hello_world_returns() {
     return new external_value(PARAM_TEXT, 'The welcome message + user first name');
 }</code></pre>
 
             <p>Vale notar que estas duas funções são muito parecidas, mudando apenas o tipo de objeto retornado. No caso de parâmetros são parâmetros para criação de um objeto do tipo "external_function_parameters", enquanto que para o retorno da função é utilizado diretamente a estrutura (multiple, single, ou value).</p>
+
             <p>E a terceira para a própria implementação da função.</p>
             <pre><code data-language="php">public static function hello_world($a) {
     global $USER;
