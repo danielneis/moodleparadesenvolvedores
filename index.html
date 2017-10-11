@@ -918,7 +918,7 @@ function is_viewing(context $context, $user = null, $withcapability = '') // O u
             <p>Vamos ver o que é preciso para disponibilizar uma nova função via Webservice. Para tal, vamos criar um plugin "local".</p>
             <p>Os "plugins locais" são uma classe de plugins do Moodle que por padrão não está acessível via interface (mas é possível incluí-los nos blocos de navegação), então é a classe mais adequada para criação de webservices. Outros tipos de plugins também podem conter webservices, mas aqui vamos focar nos plugins locais.</p>
             <p>Cada plugin local é um subdiretório do diretório "local", que fica na raiz do Moodle. Assim como outros módulos, os plugins locais possuem os arquivos "version.php" e "db/access.php" e o diretório "lang".</p>
-            <p>A implementação do webservice é feita no arquivo externallib.php (na raiz do plugin) declarando uma classe "local_meumodulo_external" que estende a classe "external_api".</p>
+            <p>A implementação do webservice é feita no arquivo <strong>externallib.php</strong> (na raiz do plugin) declarando uma classe "local_meumodulo_external" que estende a classe "external_api".</p>
             <p>Para cada função do webservice (vamos tomar por exemplo "hello_world" são necessárias três funções nesta classe:</p>
             <p>Uma para definir os parâmetros:</p>
             <pre><code data-language="php">public static function hello_world_parameters();
