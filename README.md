@@ -2,9 +2,9 @@
 
 Esta é uma documentação, em português do brasil, sobre o Moodle (https://moodle.org).
 
-Fique a vontade para clonar o repositório,
-fazer as alterações que considerar interessante
-e fazer um pull request =)
+Você pode acessar esse material em https://danielneis.github.io/moodleparadesenvolvedores/
+
+Fique a vontade para clonar o repositório, fazer as alterações que considerar interessante e fazer um pull request =)
 
 Este projeto utiliza as seguintes tecnologias:
 
